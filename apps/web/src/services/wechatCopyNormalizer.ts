@@ -316,10 +316,36 @@ const extractRootBackgroundColor = (container: HTMLElement): string | null => {
   return effectiveBg;
 };
 
+/**
+ * 检查元素是否位于一个拥有显式背景色的祖先元素内（root 以下）。
+ * 如果是，则不应覆盖其背景色，因为祖先的背景色是主题有意为之。
+ */
+const hasAncestorWithExplicitBackground = (
+  node: HTMLElement,
+  root: HTMLElement,
+): boolean => {
+  let current = node.parentElement;
+  while (current && current !== root) {
+    const bg = current.style.getPropertyValue("background");
+    const bgColor = current.style.getPropertyValue("background-color");
+    const bgImage = current.style.getPropertyValue("background-image");
+    if (
+      (bg && !isTransparentBackground(bg)) ||
+      (bgColor && !isTransparentBackground(bgColor)) ||
+      hasExplicitBackgroundImage(bgImage)
+    ) {
+      return true;
+    }
+    current = current.parentElement;
+  }
+  return false;
+};
+
 const normalizeBlockBackgroundForWechat = (
   container: HTMLElement,
   rootBgColor: string | null,
 ): void => {
+  const root = container.firstElementChild as HTMLElement | null;
   const blocks = container.querySelectorAll<HTMLElement>(
     "p,h1,h2,h3,h4,h5,h6,ul,ol,li,section,figure,figcaption",
   );
@@ -334,6 +360,9 @@ const normalizeBlockBackgroundForWechat = (
       hasExplicitBackgroundImage(backgroundImage);
 
     if (hasExplicitBackground) return;
+
+    // 祖先元素（如 blockquote）已有显式背景色时，不覆盖子元素的背景
+    if (root && hasAncestorWithExplicitBackground(node, root)) return;
 
     if (rootBgColor) {
       node.style.setProperty("background-color", rootBgColor, "important");

@@ -519,4 +519,21 @@ describe("wechatCopyService clipboard strategy", () => {
     expect(rootDiv!.style.backgroundColor).toBe("");
     expect(rootDiv!.style.color).toBe("rgb(1, 1, 1)");
   });
+
+  it("does not override background of elements inside blockquote with explicit background", () => {
+    const container = document.createElement("div");
+    container.innerHTML =
+      '<section id="wemd" style="background-color: rgb(255, 255, 255);"><blockquote style="background-color: rgb(200, 200, 200);"><p>引用文字</p></blockquote><p>普通文字</p></section>';
+
+    normalizeCopyContainer(container);
+
+    const blockquote = container.querySelector("blockquote") as HTMLElement;
+    const innerP = blockquote.querySelector("p") as HTMLElement;
+    const outerP = container.querySelector("div > p") as HTMLElement;
+
+    // blockquote 内的 p 不应被设置任何背景色，让 blockquote 背景自然透出
+    expect(innerP.style.backgroundColor).toBe("");
+    // 普通段落仍应继承根背景色
+    expect(outerP.style.backgroundColor).toBe("rgb(255, 255, 255)");
+  });
 });
