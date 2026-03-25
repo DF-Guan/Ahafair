@@ -56,7 +56,7 @@ interface ElectronUpdateAPI {
 }
 
 function App() {
-  const { workspacePath, saveFile } = useFileSystem();
+  const { workspacePath, saveFile } = useFileSystem({ enableEffects: true });
   const { type: storageType, ready } = useStorageContext();
   const historyLoading = useHistoryStore((state) => state.loading);
   const fileLoading = useFileStore((state) => state.isLoading);

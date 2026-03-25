@@ -1,30 +1,12 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import toast from "react-hot-toast";
-import {
-  Plus,
-  Copy,
-  Trash2,
-  X,
-  AlertTriangle,
-  Palette,
-  Code,
-  Download,
-  ChevronDown,
-  Upload,
-  FileText,
-  Eye,
-} from "lucide-react";
 import { useEditorStore } from "../../store/editorStore";
 import { useThemeStore } from "../../store/themeStore";
 import { useHistoryStore } from "../../store/historyStore";
 import { platformActions } from "../../lib/platformAdapter";
-import {
-  ThemeDesigner,
-  type DesignerVariables,
-  defaultVariables,
-} from "./ThemeDesigner";
+import { type DesignerVariables, defaultVariables } from "./ThemeDesigner";
 import { generateCSS } from "./ThemeDesigner/generateCSS";
-import { ThemeLivePreview } from "./ThemeLivePreview";
+import { ThemePanelView } from "./ThemePanelView";
 import "./ThemePanel.css";
 
 interface ThemePanelProps {
@@ -67,14 +49,18 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
   const persistActiveSnapshot = useHistoryStore(
     (state) => state.persistActiveSnapshot,
   );
-  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const exportMenuRef = useRef<HTMLDivElement | null>(null);
+
   const allThemes = useMemo(
     () => [
-      ...getAllThemes().filter((theme) => theme.isBuiltIn),
+      ...getAllThemes().filter((item) => item.isBuiltIn),
       ...customThemesFromStore,
     ],
     [getAllThemes, customThemesFromStore],
   );
+
   const [selectedThemeId, setSelectedThemeId] = useState<string>("");
   const [nameInput, setNameInput] = useState("");
   const [cssInput, setCssInput] = useState("");
@@ -87,7 +73,6 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
     "select-mode",
   );
   const [exportMenuOpen, setExportMenuOpen] = useState(false);
-  const exportMenuRef = useRef<HTMLDivElement>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [editorMode, setEditorMode] = useState<"visual" | "css">("visual");
   const [originalName, setOriginalName] = useState("");
@@ -95,10 +80,9 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
   const [originalDesignerVariables, setOriginalDesignerVariables] = useState<
     DesignerVariables | undefined
   >(undefined);
-  // 预览来源切换：true=当前文章, false=示例内容
   const [useCurrentArticle, setUseCurrentArticle] = useState(true);
 
-  const selectedTheme = allThemes.find((t) => t.id === selectedThemeId);
+  const selectedTheme = allThemes.find((item) => item.id === selectedThemeId);
   const isCustomTheme = selectedTheme && !selectedTheme.isBuiltIn;
 
   useEffect(() => {
@@ -128,12 +112,11 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
     prevOpenRef.current = open;
 
     if (open && !wasOpen) {
-      const currentTheme = allThemes.find((t) => t.id === theme);
+      const currentTheme = allThemes.find((item) => item.id === theme);
       if (currentTheme) {
         setSelectedThemeId(currentTheme.id);
         setNameInput(currentTheme.name);
         setCssInput(currentTheme.css);
-        // 从主题读取编辑模式和变量
         setEditorMode(currentTheme.editorMode || "css");
         const nextDesignerVariables =
           currentTheme.editorMode === "visual"
@@ -141,7 +124,6 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
             : undefined;
         setDesignerVariables(nextDesignerVariables);
         setOriginalDesignerVariables(nextDesignerVariables);
-        // 记录原始值用于比较
         setOriginalName(currentTheme.name);
         setOriginalCss(currentTheme.css);
       } else {
@@ -159,23 +141,24 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
   }, [open, theme, allThemes]);
 
   const handleSelectTheme = (themeId: string) => {
-    const theme = allThemes.find((t) => t.id === themeId);
-    if (!theme) return;
+    const target = allThemes.find((item) => item.id === themeId);
+    if (!target) return;
 
     setSelectedThemeId(themeId);
-    setNameInput(theme.name);
-    setCssInput(theme.css);
-    setEditorMode(theme.editorMode || "css");
+    setNameInput(target.name);
+    setCssInput(target.css);
+    setEditorMode(target.editorMode || "css");
     setVisualCss("");
+
     const nextDesignerVariables =
-      theme.editorMode === "visual"
-        ? normalizeDesignerVariables(theme.designerVariables)
+      target.editorMode === "visual"
+        ? normalizeDesignerVariables(target.designerVariables)
         : undefined;
     setDesignerVariables(nextDesignerVariables);
     setOriginalDesignerVariables(nextDesignerVariables);
-    // 记录原始值
-    setOriginalName(theme.name);
-    setOriginalCss(theme.css);
+
+    setOriginalName(target.name);
+    setOriginalCss(target.css);
     setIsCreating(false);
     setCreationStep("select-mode");
     setShowDeleteConfirm(false);
@@ -183,7 +166,7 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
 
   const handleCreateNew = () => {
     setIsCreating(true);
-    setCreationStep("select-mode"); // 先选择模式
+    setCreationStep("select-mode");
     setSelectedThemeId("");
     setNameInput("");
     setCssInput("");
@@ -239,7 +222,6 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
   }, [exportMenuOpen]);
 
   const handleApply = async () => {
-    // 自动保存逻辑：如果是自定义主题且有未保存的更改，先执行保存
     if (isCustomTheme && hasChanges) {
       const cssToVerify =
         editorMode === "visual" ? visualCss || cssInput : cssInput;
@@ -267,7 +249,6 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
     if (isCreating) {
       const cssToSave =
         editorMode === "visual" ? visualCss || cssInput : cssInput;
-      // 创建新主题，传入编辑模式和可视化变量
       const newTheme = createTheme(
         nameInput,
         editorMode,
@@ -288,7 +269,6 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
 
       setSelectedThemeId(newTheme.id);
       setCssInput(cssToSave);
-      // 重置原始值，使 hasChanges 变为 false
       setOriginalName(nameInput);
       setOriginalCss(cssToSave);
       setOriginalDesignerVariables(
@@ -296,8 +276,10 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
       );
       setIsCreating(false);
       toast.success("主题创建成功");
-    } else if (isCustomTheme) {
-      // 更新现有主题（可视化主题从 designerVariables 重新生成 CSS 以确保同步）
+      return;
+    }
+
+    if (isCustomTheme) {
       const isVisualMode =
         selectedTheme?.editorMode === "visual" && designerVariables;
       const cssToSave = isVisualMode
@@ -329,7 +311,7 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
           });
         }
       }
-      // 保存后重置原始值
+
       setOriginalName(nameInput.trim() || "未命名主题");
       setOriginalCss(cssInput);
       setOriginalDesignerVariables(
@@ -346,9 +328,7 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
 
   const handleConfirmDelete = () => {
     if (!isCustomTheme) return;
-
     deleteTheme(selectedThemeId);
-    // 切换到默认主题并应用
     selectTheme("default");
     handleSelectTheme("default");
     setShowDeleteConfirm(false);
@@ -357,354 +337,92 @@ export function ThemePanel({ open, onClose }: ThemePanelProps) {
 
   const handleDuplicate = () => {
     if (!selectedTheme) return;
-    const newName = `${selectedTheme.name} (副本)`;
-    const duplicated = duplicateTheme(selectedThemeId, newName);
+    const duplicated = duplicateTheme(
+      selectedThemeId,
+      `${selectedTheme.name} (副本)`,
+    );
     handleSelectTheme(duplicated.id);
     toast.success("主题已复制");
   };
 
-  if (!open) return null;
+  const handleCancelCreate = () => {
+    setIsCreating(false);
+    if (theme) {
+      handleSelectTheme(theme);
+    }
+  };
 
-  const builtInThemes = allThemes.filter((t) => t.isBuiltIn);
-  const customThemes = allThemes.filter((t) => !t.isBuiltIn);
-  // 可视化模式下（无论是创建还是编辑），优先使用 visualCss（编辑器生成的最新 CSS）
+  const handleImportThemeFile = async (file: File) => {
+    const success = await importTheme(file);
+    if (success) {
+      toast.success("主题导入成功");
+    } else {
+      toast.error("导入失败，请检查文件格式");
+    }
+  };
+
+  const builtInThemes = allThemes.filter((item) => item.isBuiltIn);
+  const customThemes = allThemes.filter((item) => !item.isBuiltIn);
   const isVisualEditing =
     (isCreating && editorMode === "visual") ||
     (!isCreating && isCustomTheme && selectedTheme?.editorMode === "visual");
   const previewCss = isVisualEditing ? visualCss || cssInput : cssInput;
-  const canSave =
+  const canSave = Boolean(
     nameInput.trim() &&
-    (editorMode === "visual"
-      ? visualCss.trim() || cssInput.trim()
-      : cssInput.trim());
+      (editorMode === "visual"
+        ? visualCss.trim() || cssInput.trim()
+        : cssInput.trim()),
+  );
 
   return (
-    <div className="theme-overlay" onClick={onClose}>
-      <div className="theme-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="theme-header">
-          <h3>主题管理</h3>
-          <button className="close-btn" onClick={onClose} aria-label="关闭">
-            <X size={20} />
-          </button>
-        </div>
-
-        <div className="theme-body">
-          {/* 左侧主题列表 */}
-          <div className="theme-sidebar">
-            <button className="btn-new-theme" onClick={handleCreateNew}>
-              <Plus size={16} /> 新建自定义主题
-            </button>
-            <button
-              className="btn-import-theme"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <Upload size={16} /> 导入主题
-            </button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept=".json"
-              style={{ display: "none" }}
-              onChange={async (e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  const success = await importTheme(file);
-                  if (success) {
-                    toast.success("主题导入成功");
-                  } else {
-                    toast.error("导入失败，请检查文件格式");
-                  }
-                  e.target.value = "";
-                }
-              }}
-            />
-
-            <div className="theme-list-scroll">
-              {customThemes.length > 0 && (
-                <div className="theme-group">
-                  <div className="theme-group-title">自定义主题</div>
-                  {customThemes.map((item) => (
-                    <button
-                      key={item.id}
-                      className={`theme-item ${item.id === selectedThemeId ? "active" : ""}`}
-                      onClick={() => handleSelectTheme(item.id)}
-                    >
-                      {item.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              <div className="theme-group">
-                <div className="theme-group-title">内置主题</div>
-                {builtInThemes.map((item) => (
-                  <button
-                    key={item.id}
-                    className={`theme-item ${item.id === selectedThemeId ? "active" : ""}`}
-                    onClick={() => handleSelectTheme(item.id)}
-                  >
-                    {item.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* 右侧编辑区 */}
-          <div className="theme-editor" style={{ position: "relative" }}>
-            {showDeleteConfirm && (
-              <div className="delete-confirm-overlay">
-                <div className="delete-confirm-box">
-                  <div className="confirm-icon-wrapper">
-                    <AlertTriangle size={24} color="#ef4444" />
-                  </div>
-                  <h4>确认删除</h4>
-                  <p>
-                    确定要删除主题 "{selectedTheme?.name}" 吗？此操作无法撤销。
-                  </p>
-                  <div className="delete-confirm-actions">
-                    <button
-                      className="btn-secondary"
-                      onClick={() => setShowDeleteConfirm(false)}
-                    >
-                      取消
-                    </button>
-                    <button
-                      className="btn-primary"
-                      style={{ background: "#ef4444", boxShadow: "none" }}
-                      onClick={handleConfirmDelete}
-                    >
-                      确认删除
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <div className="theme-form">
-              {/* 模式选择步骤 - 新建时首先选择编辑方式 */}
-              {isCreating && creationStep === "select-mode" && (
-                <div className="mode-selection">
-                  <h3>选择创建方式</h3>
-                  <div className="mode-cards">
-                    <button
-                      className="mode-card"
-                      onClick={() => handleSelectCreationMode("visual")}
-                    >
-                      <span className="mode-icon">
-                        <Palette size={32} />
-                      </span>
-                      <span className="mode-title">可视化设计</span>
-                      <span className="mode-desc">
-                        通过可视化控件快速定制主题样式
-                      </span>
-                      <span className="mode-tag">适合快速上手</span>
-                    </button>
-                    <button
-                      className="mode-card"
-                      onClick={() => handleSelectCreationMode("css")}
-                    >
-                      <span className="mode-icon">
-                        <Code size={32} />
-                      </span>
-                      <span className="mode-title">手写 CSS</span>
-                      <span className="mode-desc">
-                        直接编写 CSS 代码，完全自由控制
-                      </span>
-                      <span className="mode-tag">适合高级用户</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* 正式编辑区 - 选择模式后或编辑已有主题时显示 */}
-              {(!isCreating || (isCreating && creationStep === "editing")) && (
-                <>
-                  {/* 实时预览区 */}
-                  <div className="theme-form-preview">
-                    <div className="preview-source-toggle">
-                      <button
-                        className={`toggle-btn ${useCurrentArticle ? "active" : ""}`}
-                        onClick={() => setUseCurrentArticle(true)}
-                        title="预览当前正在编辑的文章"
-                      >
-                        <FileText size={14} />
-                        当前文章
-                      </button>
-                      <button
-                        className={`toggle-btn ${!useCurrentArticle ? "active" : ""}`}
-                        onClick={() => setUseCurrentArticle(false)}
-                        title="预览内置示例内容"
-                      >
-                        <Eye size={14} />
-                        示例内容
-                      </button>
-                    </div>
-                    <ThemeLivePreview
-                      css={previewCss}
-                      designerVariables={
-                        isVisualEditing ? designerVariables : undefined
-                      }
-                      useCurrentArticle={useCurrentArticle}
-                    />
-                  </div>
-
-                  <div className="theme-form-fields">
-                    <label>主题名称</label>
-                    <input
-                      value={nameInput}
-                      onChange={(e) => setNameInput(e.target.value)}
-                      placeholder="输入主题名称..."
-                      disabled={!isCreating && !isCustomTheme}
-                    />
-
-                    {/* 可视化设计器 - 可视化模式 */}
-                    {((isCreating && editorMode === "visual") ||
-                      (!isCreating &&
-                        isCustomTheme &&
-                        selectedTheme?.editorMode === "visual")) && (
-                      <div className="visual-designer-container">
-                        <ThemeDesigner
-                          onCSSChange={handleVisualCssChange}
-                          onVariablesChange={handleVariablesChange}
-                          initialVariables={
-                            isCreating
-                              ? undefined
-                              : selectedTheme?.designerVariables
-                          }
-                        />
-                      </div>
-                    )}
-
-                    {/* CSS 编辑器 - CSS 模式或编辑旧版/CSS 主题 */}
-                    {((isCreating && editorMode === "css") ||
-                      (!isCreating &&
-                        selectedTheme?.editorMode !== "visual")) && (
-                      <>
-                        <label>CSS 样式</label>
-                        <textarea
-                          value={cssInput}
-                          onChange={(e) => handleCssInputChange(e.target.value)}
-                          placeholder="输入 CSS 样式代码..."
-                          spellCheck={false}
-                          disabled={!isCreating && !isCustomTheme}
-                        />
-                      </>
-                    )}
-
-                    {!isCreating && !isCustomTheme && (
-                      <p className="info-hint">
-                        💡
-                        内置主题不可编辑，点击"复制"按钮可以基于此主题创建自定义主题
-                      </p>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className="theme-actions">
-              {isCreating ? (
-                <>
-                  <button
-                    className="btn-secondary"
-                    onClick={() => {
-                      setIsCreating(false);
-                      if (theme) {
-                        handleSelectTheme(theme);
-                      }
-                    }}
-                  >
-                    取消
-                  </button>
-                  <button
-                    className="btn-primary"
-                    onClick={handleSave}
-                    disabled={!canSave}
-                  >
-                    保存为新主题
-                  </button>
-                </>
-              ) : isCustomTheme ? (
-                <>
-                  <button className="btn-icon-text" onClick={handleDuplicate}>
-                    <Copy size={16} /> 复制
-                  </button>
-                  <div className="theme-export-menu" ref={exportMenuRef}>
-                    <button
-                      className="btn-icon-text"
-                      onClick={() => setExportMenuOpen((open) => !open)}
-                      aria-haspopup="menu"
-                      aria-expanded={exportMenuOpen}
-                    >
-                      <Download size={16} /> 导出 <ChevronDown size={14} />
-                    </button>
-                    {exportMenuOpen && (
-                      <div className="theme-export-dropdown" role="menu">
-                        {selectedTheme?.editorMode === "visual" && (
-                          <button
-                            type="button"
-                            role="menuitem"
-                            onClick={() => {
-                              exportTheme(selectedThemeId);
-                              setExportMenuOpen(false);
-                            }}
-                          >
-                            <Download size={16} /> JSON（支持可视化编辑）
-                          </button>
-                        )}
-                        <button
-                          type="button"
-                          role="menuitem"
-                          onClick={() => {
-                            exportThemeCSS(selectedThemeId);
-                            setExportMenuOpen(false);
-                          }}
-                        >
-                          <Download size={16} /> CSS（不支持可视化编辑）
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  <button
-                    className="btn-icon-text btn-danger"
-                    onClick={handleDeleteClick}
-                  >
-                    <Trash2 size={16} /> 删除
-                  </button>
-                  <div className="flex-spacer"></div>
-                  <button className="btn-secondary" onClick={onClose}>
-                    取消
-                  </button>
-                  <button
-                    className="btn-primary"
-                    onClick={handleSave}
-                    disabled={!hasChanges}
-                  >
-                    保存修改
-                  </button>
-                  <button className="btn-primary" onClick={handleApply}>
-                    应用主题
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className="btn-icon-text" onClick={handleDuplicate}>
-                    <Copy size={16} /> 复制
-                  </button>
-                  <div className="flex-spacer"></div>
-                  <button className="btn-secondary" onClick={onClose}>
-                    取消
-                  </button>
-                  <button className="btn-primary" onClick={handleApply}>
-                    应用主题
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemePanelView
+      open={open}
+      onClose={onClose}
+      fileInputRef={fileInputRef}
+      builtInThemes={builtInThemes}
+      customThemes={customThemes}
+      selectedTheme={selectedTheme}
+      selectedThemeId={selectedThemeId}
+      isCustomTheme={Boolean(isCustomTheme)}
+      isCreating={isCreating}
+      creationStep={creationStep}
+      editorMode={editorMode}
+      isVisualEditing={Boolean(isVisualEditing)}
+      showDeleteConfirm={showDeleteConfirm}
+      useCurrentArticle={useCurrentArticle}
+      previewCss={previewCss}
+      designerVariables={designerVariables}
+      nameInput={nameInput}
+      cssInput={cssInput}
+      canSave={canSave}
+      hasChanges={Boolean(hasChanges)}
+      exportMenuOpen={exportMenuOpen}
+      exportMenuRef={exportMenuRef}
+      onSelectTheme={handleSelectTheme}
+      onCreateNew={handleCreateNew}
+      onImportThemeFile={handleImportThemeFile}
+      onSelectCreationMode={handleSelectCreationMode}
+      onSetUseCurrentArticle={setUseCurrentArticle}
+      onVisualCssChange={handleVisualCssChange}
+      onVariablesChange={handleVariablesChange}
+      onNameInputChange={setNameInput}
+      onCssInputChange={handleCssInputChange}
+      onCloseDeleteConfirm={() => setShowDeleteConfirm(false)}
+      onConfirmDelete={handleConfirmDelete}
+      onCancelCreate={handleCancelCreate}
+      onDuplicate={handleDuplicate}
+      onToggleExportMenu={() => setExportMenuOpen((prev) => !prev)}
+      onExportJson={() => {
+        exportTheme(selectedThemeId);
+        setExportMenuOpen(false);
+      }}
+      onExportCss={() => {
+        exportThemeCSS(selectedThemeId);
+        setExportMenuOpen(false);
+      }}
+      onDeleteClick={handleDeleteClick}
+      onSave={handleSave}
+      onApply={handleApply}
+    />
   );
 }

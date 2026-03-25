@@ -4,6 +4,16 @@ import type {
   StorageAdapterContext,
   StorageInitResult,
 } from "../types";
+import {
+  copyDirectoryRecursive,
+  deleteDirectoryRecursive,
+  normalizePath,
+  resolveDirectoryHandle,
+  resolveFileHandle,
+  resolveParentAndName,
+  scanDirectory,
+  splitPath,
+} from "./fileSystemAdapterHelpers";
 
 export class FileSystemAdapter implements StorageAdapter {
   readonly type = "filesystem" as const;
@@ -86,103 +96,7 @@ export class FileSystemAdapter implements StorageAdapter {
    */
   async listFiles(): Promise<FileItem[]> {
     const handle = this.ensureHandle();
-    return this.scanDirectory(handle, "");
-  }
-
-  /**
-   * 递归扫描目录
-   */
-  private async scanDirectory(
-    dirHandle: FileSystemDirectoryHandle,
-    basePath: string,
-  ): Promise<FileItem[]> {
-    const result: FileItem[] = [];
-    const folders: FileItem[] = [];
-    const files: FileItem[] = [];
-
-    for await (const entry of dirHandle.values()) {
-      if (entry.name.startsWith(".")) continue; // 忽略隐藏文件/文件夹
-
-      const entryPath = basePath ? `${basePath}/${entry.name}` : entry.name;
-
-      if (entry.kind === "directory") {
-        const subHandle = await dirHandle.getDirectoryHandle(entry.name);
-        const children = await this.scanDirectory(subHandle, entryPath);
-        folders.push({
-          path: entryPath,
-          name: entry.name,
-          meta: {
-            isDirectory: true,
-            children,
-          },
-        });
-      } else if (entry.kind === "file" && entry.name.endsWith(".md")) {
-        const fileHandle = entry as FileSystemFileHandle;
-        const file = await fileHandle.getFile();
-
-        // 读取文件开头提取 frontmatter 元数据
-        let themeName: string | undefined;
-        let title: string | undefined;
-        try {
-          const slice = file.slice(0, 1200);
-          const text = await slice.text();
-          const match = text.match(
-            /^(?:\uFEFF)?---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/,
-          );
-          if (match) {
-            const parseValue = (raw?: string) => {
-              if (!raw) return undefined;
-              const trimmed = raw.trim();
-              if (
-                (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
-                (trimmed.startsWith("'") && trimmed.endsWith("'"))
-              ) {
-                const quote = trimmed[0];
-                const inner = trimmed.slice(1, -1);
-                if (quote === '"') {
-                  return inner.replace(/\\"/g, '"').replace(/\\\\/g, "\\");
-                }
-                return inner.replace(/\\'/g, "'");
-              }
-              return trimmed;
-            };
-            const themeMatch = match[1].match(/themeName:\s*(.+)/);
-            const titleMatch = match[1].match(/title:\s*(.+)/);
-            if (themeMatch) {
-              themeName = parseValue(themeMatch[1]);
-            }
-            if (titleMatch) {
-              title = parseValue(titleMatch[1]);
-            }
-          }
-        } catch {
-          // ignore
-        }
-
-        files.push({
-          path: entryPath,
-          name: entry.name,
-          size: file.size,
-          updatedAt: file.lastModified
-            ? new Date(file.lastModified).toISOString()
-            : undefined,
-          meta: { themeName, title, isDirectory: false },
-        });
-      }
-    }
-
-    // 文件按编辑时间降序排序
-    files.sort((a, b) => {
-      const timeA = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
-      const timeB = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
-      return timeB - timeA;
-    });
-
-    // 文件夹按名称排序
-    folders.sort((a, b) => a.name.localeCompare(b.name));
-
-    // 先文件夹后文件
-    return [...folders, ...files];
+    return scanDirectory(handle, "");
   }
 
   async readFile(path: string): Promise<string> {
@@ -355,7 +269,7 @@ export class FileSystemAdapter implements StorageAdapter {
         return { success: true };
       } catch {
         const folderHandle = await parent.getDirectoryHandle(name);
-        await this.deleteDirectoryRecursive(folderHandle);
+        await deleteDirectoryRecursive(folderHandle);
         await parent.removeEntry(name);
       }
       return { success: true };
@@ -425,15 +339,7 @@ export class FileSystemAdapter implements StorageAdapter {
     path: string,
     create = false,
   ): Promise<FileSystemFileHandle> {
-    const parts = path.split("/");
-    const fileName = parts.pop()!;
-    let current = this.ensureHandle();
-
-    for (const part of parts) {
-      current = await current.getDirectoryHandle(part, { create });
-    }
-
-    return current.getFileHandle(fileName, { create });
+    return resolveFileHandle(this.ensureHandle(), path, create);
   }
 
   /**
@@ -442,43 +348,21 @@ export class FileSystemAdapter implements StorageAdapter {
   private async resolveParentAndName(
     path: string,
   ): Promise<{ parent: FileSystemDirectoryHandle; name: string }> {
-    const parts = path.split("/");
-    const name = parts.pop()!;
-    let current = this.ensureHandle();
-
-    for (const part of parts) {
-      current = await current.getDirectoryHandle(part);
-    }
-
-    return { parent: current, name };
+    return resolveParentAndName(this.ensureHandle(), path);
   }
 
   private async resolveDirectoryHandle(
     path: string,
   ): Promise<FileSystemDirectoryHandle> {
-    if (!path) return this.ensureHandle();
-    const parts = path.split("/").filter(Boolean);
-    let current = this.ensureHandle();
-    for (const part of parts) {
-      current = await current.getDirectoryHandle(part);
-    }
-    return current;
+    return resolveDirectoryHandle(this.ensureHandle(), path);
   }
 
   private normalizePath(input: string): string {
-    return input.replace(/\\/g, "/");
+    return normalizePath(input);
   }
 
   private splitPath(path: string): { dir: string; name: string } {
-    const normalized = this.normalizePath(path);
-    const lastSlash = normalized.lastIndexOf("/");
-    if (lastSlash < 0) {
-      return { dir: "", name: normalized };
-    }
-    return {
-      dir: normalized.slice(0, lastSlash),
-      name: normalized.slice(lastSlash + 1),
-    };
+    return splitPath(path);
   }
 
   private async moveFolderPath(
@@ -542,12 +426,12 @@ export class FileSystemAdapter implements StorageAdapter {
       const targetHandle = await newParent.getDirectoryHandle(newName, {
         create: true,
       });
-      await this.copyDirectoryRecursive(sourceHandle, targetHandle);
+      await copyDirectoryRecursive(sourceHandle, targetHandle);
 
       try {
         await oldParent.removeEntry(oldName, { recursive: true });
       } catch {
-        await this.deleteDirectoryRecursive(sourceHandle);
+        await deleteDirectoryRecursive(sourceHandle);
         await oldParent.removeEntry(oldName);
       }
 
@@ -557,44 +441,6 @@ export class FileSystemAdapter implements StorageAdapter {
         success: false,
         error: e instanceof Error ? e.message : String(e),
       };
-    }
-  }
-
-  private async copyDirectoryRecursive(
-    source: FileSystemDirectoryHandle,
-    target: FileSystemDirectoryHandle,
-  ): Promise<void> {
-    for await (const entry of source.values()) {
-      if (entry.kind === "directory") {
-        const nextTarget = await target.getDirectoryHandle(entry.name, {
-          create: true,
-        });
-        await this.copyDirectoryRecursive(
-          entry as FileSystemDirectoryHandle,
-          nextTarget,
-        );
-      } else {
-        const file = await (entry as FileSystemFileHandle).getFile();
-        const fileHandle = await target.getFileHandle(entry.name, {
-          create: true,
-        });
-        const writable = await fileHandle.createWritable();
-        await writable.write(file);
-        await writable.close();
-      }
-    }
-  }
-
-  private async deleteDirectoryRecursive(
-    handle: FileSystemDirectoryHandle,
-  ): Promise<void> {
-    for await (const entry of handle.values()) {
-      if (entry.kind === "directory") {
-        await this.deleteDirectoryRecursive(entry as FileSystemDirectoryHandle);
-        await handle.removeEntry(entry.name);
-      } else {
-        await handle.removeEntry(entry.name);
-      }
     }
   }
 }

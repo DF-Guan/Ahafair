@@ -2,40 +2,26 @@ import type { SyntheticEvent } from "react";
 import { useState, useMemo, useCallback } from "react";
 import { useFileSystem } from "../../hooks/useFileSystem";
 import toast from "react-hot-toast";
-import type { FileItem, FolderItem, TreeItem } from "../../store/fileTypes";
+import type { FileItem, FolderItem } from "../../store/fileTypes";
+import { type SortMode, getSortMode, saveSortMode } from "./sortUtils";
 import {
-  type SortMode,
-  getSortMode,
-  saveSortMode,
-  compareFiles,
-  sortTreeItems,
-} from "./sortUtils";
+  buildFilteredItems,
+  collectAllFolders,
+  expandAncestorFolders,
+  FILE_DRAG_TYPE,
+  findFolderByPath,
+  FOLDER_DRAG_TYPE,
+  formatRelativeTime,
+  getBaseName,
+  getCollapsedState,
+  isDescendantPath,
+  remapPath,
+  resolveParentFolderPath,
+  ROOT_DROP_TARGET,
+  saveCollapsedState,
+} from "./sidebarStateHelpers";
 
-const COLLAPSED_KEY = "wemd-folder-collapsed";
-const ROOT_DROP_TARGET = "__root__";
-const FILE_DRAG_TYPE = "application/x-wemd-file";
-const FOLDER_DRAG_TYPE = "application/x-wemd-folder";
-
-function getCollapsedState(): Set<string> {
-  try {
-    const saved = localStorage.getItem(COLLAPSED_KEY);
-    return saved ? new Set(JSON.parse(saved)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-function saveCollapsedState(collapsed: Set<string>) {
-  localStorage.setItem(COLLAPSED_KEY, JSON.stringify([...collapsed]));
-}
-
-export function getBaseName(rawPath: string | null): string {
-  if (!rawPath) return "";
-  const last = Math.max(rawPath.lastIndexOf("/"), rawPath.lastIndexOf("\\"));
-  return last >= 0 ? rawPath.slice(last + 1) : rawPath;
-}
-
-export { ROOT_DROP_TARGET, FILE_DRAG_TYPE, FOLDER_DRAG_TYPE };
+export { ROOT_DROP_TARGET, FILE_DRAG_TYPE, FOLDER_DRAG_TYPE, getBaseName };
 
 export function useSidebarState() {
   const {
@@ -94,31 +80,12 @@ export function useSidebarState() {
 
   const isDragEnabled = !filter;
 
-  const allFolders = useMemo(() => {
-    const folders: { name: string; path: string }[] = [];
-    const collectFolders = (items: TreeItem[], prefix = "") => {
-      for (const item of items) {
-        if (item.isDirectory) {
-          const fullName = prefix ? `${prefix}/${item.name}` : item.name;
-          folders.push({ name: fullName, path: item.path });
-          collectFolders(item.children, fullName);
-        }
-      }
-    };
-    collectFolders(files);
-    return folders;
-  }, [files]);
+  const allFolders = useMemo(() => collectAllFolders(files), [files]);
 
-  const filteredItems = useMemo(() => {
-    if (!filter) return sortTreeItems(files, sortMode);
-    const flatFiles = flattenFiles(files);
-    const keyword = filter.toLowerCase();
-    const matched = flatFiles.filter((f) =>
-      (f.title || f.name).toLowerCase().includes(keyword),
-    );
-    matched.sort((a, b) => compareFiles(a, b, sortMode));
-    return matched;
-  }, [files, filter, flattenFiles, sortMode]);
+  const filteredItems = useMemo(
+    () => buildFilteredItems(files, filter, flattenFiles, sortMode),
+    [files, filter, flattenFiles, sortMode],
+  );
 
   const handleSetSortMode = useCallback((mode: SortMode) => {
     setSortModeState(mode);
@@ -145,68 +112,33 @@ export function useSidebarState() {
     });
   }, []);
 
-  const normalizePath = useCallback(
-    (value: string) => value.replace(/\\/g, "/"),
-    [],
-  );
-
   const updateFolderPathState = useCallback(
     (oldPath: string, newPath: string) => {
-      const normalizedOld = normalizePath(oldPath);
-      const normalizedNew = normalizePath(newPath);
-
       setActiveFolder((current) => {
         if (!current) return current;
-        const normalizedCurrent = normalizePath(current);
-        if (
-          normalizedCurrent === normalizedOld ||
-          normalizedCurrent.startsWith(`${normalizedOld}/`)
-        ) {
-          const suffix = normalizedCurrent.slice(normalizedOld.length);
-          const updatedNormalized = normalizedNew + suffix;
-          return current.includes("\\")
-            ? updatedNormalized.replace(/\//g, "\\")
-            : updatedNormalized;
-        }
-        return current;
+        return remapPath(current, oldPath, newPath) ?? current;
       });
 
       setCollapsedFolders((prev) => {
         const next = new Set<string>();
         for (const entry of prev) {
-          const normalizedEntry = normalizePath(entry);
-          if (
-            normalizedEntry === normalizedOld ||
-            normalizedEntry.startsWith(`${normalizedOld}/`)
-          ) {
-            const suffix = normalizedEntry.slice(normalizedOld.length);
-            const updatedNormalized = normalizedNew + suffix;
-            next.add(
-              entry.includes("\\")
-                ? updatedNormalized.replace(/\//g, "\\")
-                : updatedNormalized,
-            );
-          } else {
-            next.add(entry);
-          }
+          next.add(remapPath(entry, oldPath, newPath) ?? entry);
         }
         saveCollapsedState(next);
         return next;
       });
     },
-    [normalizePath],
+    [],
   );
 
   const getFolderMoveTargets = useCallback(
     (folder: FolderItem) => {
-      const normalizedFolder = normalizePath(folder.path);
       return allFolders.filter((item) => {
         if (item.path === folder.path) return false;
-        const normalizedTarget = normalizePath(item.path);
-        return !normalizedTarget.startsWith(`${normalizedFolder}/`);
+        return !isDescendantPath(folder.path, item.path);
       });
     },
-    [allFolders, normalizePath],
+    [allFolders],
   );
 
   const closeMenu = useCallback(() => {
@@ -366,37 +298,12 @@ export function useSidebarState() {
     [files, flattenFiles],
   );
 
-  const findFolderByPath = useCallback(
-    (items: TreeItem[], target: string): FolderItem | null => {
-      for (const item of items) {
-        if (item.isDirectory) {
-          if (item.path === target) return item;
-          const found = findFolderByPath(item.children, target);
-          if (found) return found;
-        }
-      }
-      return null;
-    },
-    [],
-  );
-
-  const isDescendantPath = useCallback(
-    (parentPath: string, childPath: string) => {
-      const normalizedParent = normalizePath(parentPath);
-      const normalizedChild = normalizePath(childPath);
-      return (
-        normalizedChild === normalizedParent ||
-        normalizedChild.startsWith(`${normalizedParent}/`)
-      );
-    },
-    [normalizePath],
-  );
-
   const handleDropToFolder = useCallback(
     async (e: React.DragEvent, targetFolder: string) => {
       if (!isDragEnabled) return;
       e.preventDefault();
       e.stopPropagation();
+
       const draggedFolderPath = e.dataTransfer.getData(FOLDER_DRAG_TYPE);
       if (draggedFolderPath) {
         if (targetFolder && isDescendantPath(draggedFolderPath, targetFolder)) {
@@ -412,6 +319,7 @@ export function useSidebarState() {
         setDragOverTarget(null);
         return;
       }
+
       const filePath =
         e.dataTransfer.getData(FILE_DRAG_TYPE) ||
         e.dataTransfer.getData("text/plain");
@@ -424,8 +332,6 @@ export function useSidebarState() {
     [
       isDragEnabled,
       files,
-      isDescendantPath,
-      findFolderByPath,
       moveFolder,
       updateFolderPathState,
       findFileByPath,
@@ -438,6 +344,7 @@ export function useSidebarState() {
       if (!isDragEnabled) return;
       e.preventDefault();
       if (e.target !== e.currentTarget) return;
+
       const draggedFolderPath = e.dataTransfer.getData(FOLDER_DRAG_TYPE);
       if (draggedFolderPath) {
         const folder = findFolderByPath(files, draggedFolderPath);
@@ -449,6 +356,7 @@ export function useSidebarState() {
         setDragOverTarget(null);
         return;
       }
+
       const filePath =
         e.dataTransfer.getData(FILE_DRAG_TYPE) ||
         e.dataTransfer.getData("text/plain");
@@ -461,7 +369,6 @@ export function useSidebarState() {
     [
       isDragEnabled,
       files,
-      findFolderByPath,
       moveFolder,
       updateFolderPathState,
       findFileByPath,
@@ -482,38 +389,12 @@ export function useSidebarState() {
   const handleFileClick = useCallback(
     (file: FileItem) => {
       openFile(file);
-      const normalizedPath = file.path.replace(/\\/g, "/");
-      const lastIndex = normalizedPath.lastIndexOf("/");
-      let parentPath = null;
-      if (lastIndex !== -1) {
-        parentPath = file.path.substring(
-          0,
-          file.path.length - (normalizedPath.length - lastIndex),
-        );
-      }
-      if (!parentPath) {
-        setActiveFolder(null);
-      } else if (workspacePath && parentPath === workspacePath) {
-        setActiveFolder(null);
-      } else {
-        setActiveFolder(parentPath);
-      }
+      const parentPath = resolveParentFolderPath(file.path, workspacePath);
+      setActiveFolder(parentPath);
+
       if (parentPath) {
         setCollapsedFolders((prev) => {
-          const next = new Set(prev);
-          let current = file.path;
-          while (true) {
-            const sepIndex = Math.max(
-              current.lastIndexOf("/"),
-              current.lastIndexOf("\\"),
-            );
-            if (sepIndex === -1) break;
-            const parent = current.substring(0, sepIndex);
-            if (workspacePath && parent === workspacePath) break;
-            if (next.has(parent)) next.delete(parent);
-            current = parent;
-            if (!current) break;
-          }
+          const next = expandAncestorFolders(prev, file.path, workspacePath);
           saveCollapsedState(next);
           return next;
         });
@@ -522,38 +403,9 @@ export function useSidebarState() {
     [openFile, workspacePath],
   );
 
-  const formatTime = useCallback((date: Date) => {
-    const now = new Date();
-    const startOfToday = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-    );
-    const startOfDate = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-    );
-    const diff = startOfToday.getTime() - startOfDate.getTime();
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-    if (days <= 0) {
-      return date.toLocaleTimeString("zh-CN", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    }
-
-    if (days < 7) {
-      const rtf = new Intl.RelativeTimeFormat("zh", { numeric: "auto" });
-      return rtf.format(-days, "day");
-    }
-
-    return date.toLocaleDateString("zh-CN", { month: "short", day: "numeric" });
-  }, []);
+  const formatTime = useCallback((date: Date) => formatRelativeTime(date), []);
 
   return {
-    // Data from useFileSystem
     files,
     currentFile,
     createFile,
@@ -563,12 +415,10 @@ export function useSidebarState() {
     workspacePath,
     flattenFiles,
 
-    // Computed values
     allFolders,
     filteredItems,
     isDragEnabled,
 
-    // State
     filter,
     setFilter,
     renamingPath,
@@ -612,7 +462,6 @@ export function useSidebarState() {
     sortMode,
     handleSetSortMode,
 
-    // Handlers
     toggleFolder,
     getFolderMoveTargets,
     closeMenu,
