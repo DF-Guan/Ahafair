@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { useThemeStore } from "../../store/themeStore";
 import {
   Search,
@@ -6,6 +7,8 @@ import {
   FolderPlus,
   MoreHorizontal,
   ChevronRight,
+  ArrowUpDown,
+  Check,
 } from "lucide-react";
 import { SidebarFooter } from "./SidebarFooter";
 import {
@@ -23,13 +26,51 @@ import {
   FILE_DRAG_TYPE,
   FOLDER_DRAG_TYPE,
 } from "./useSidebarState";
+import type { SortMode } from "./sortUtils";
 import "./FileSidebar.css";
 
 import type { FileItem, FolderItem, TreeItem } from "../../store/fileTypes";
 
+const SORT_OPTIONS: { value: SortMode; label: string }[] = [
+  { value: "recent", label: "最近编辑" },
+  { value: "name-asc", label: "名称升序" },
+  { value: "name-desc", label: "名称降序" },
+];
+
 export function FileSidebar() {
   const state = useSidebarState();
   const currentThemeName = useThemeStore((s) => s.themeName);
+  const [showSortMenu, setShowSortMenu] = useState(false);
+  const sortBtnRef = useRef<HTMLButtonElement>(null);
+  const sortMenuRef = useRef<HTMLDivElement>(null);
+
+  // 右键菜单打开时关闭排序菜单
+  useEffect(() => {
+    if (state.menuOpen) setShowSortMenu(false);
+  }, [state.menuOpen]);
+
+  useEffect(() => {
+    if (!showSortMenu) return;
+    const handleClick = (e: MouseEvent) => {
+      if (
+        sortMenuRef.current &&
+        !sortMenuRef.current.contains(e.target as Node) &&
+        sortBtnRef.current &&
+        !sortBtnRef.current.contains(e.target as Node)
+      ) {
+        setShowSortMenu(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowSortMenu(false);
+    };
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showSortMenu]);
 
   const renderFileItem = (file: FileItem) => (
     <div
@@ -231,6 +272,34 @@ export function FileSidebar() {
             onChange={(e) => state.setFilter(e.target.value)}
           />
         </div>
+        <div className="fs-sort-wrapper">
+          <button
+            ref={sortBtnRef}
+            className="fs-btn-secondary fs-btn-icon-only fs-sort-btn"
+            onClick={() => setShowSortMenu((v) => !v)}
+            onMouseEnter={(e) => state.showTooltip(e, "排序方式")}
+            onMouseLeave={state.hideTooltip}
+          >
+            <ArrowUpDown size={14} />
+          </button>
+          {showSortMenu && (
+            <div ref={sortMenuRef} className="fs-sort-dropdown">
+              {SORT_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  className={`fs-sort-option ${state.sortMode === opt.value ? "active" : ""}`}
+                  onClick={() => {
+                    state.handleSetSortMode(opt.value);
+                    setShowSortMenu(false);
+                  }}
+                >
+                  <span>{opt.label}</span>
+                  {state.sortMode === opt.value && <Check size={14} />}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="fs-body">
@@ -273,7 +342,7 @@ export function FileSidebar() {
             ? (state.filteredItems as FileItem[]).map((file) =>
                 renderFileItem(file),
               )
-            : renderTreeItems(state.files)}
+            : renderTreeItems(state.filteredItems as TreeItem[])}
           {state.filteredItems.length === 0 && (
             <div className="fs-empty">暂无文件</div>
           )}

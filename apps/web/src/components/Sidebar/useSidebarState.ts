@@ -3,6 +3,13 @@ import { useState, useMemo, useCallback } from "react";
 import { useFileSystem } from "../../hooks/useFileSystem";
 import toast from "react-hot-toast";
 import type { FileItem, FolderItem, TreeItem } from "../../store/fileTypes";
+import {
+  type SortMode,
+  getSortMode,
+  saveSortMode,
+  compareFiles,
+  sortTreeItems,
+} from "./sortUtils";
 
 const COLLAPSED_KEY = "wemd-folder-collapsed";
 const ROOT_DROP_TARGET = "__root__";
@@ -83,6 +90,7 @@ export function useSidebarState() {
     useState<FolderItem | null>(null);
   const [renameFolderValue, setRenameFolderValue] = useState("");
   const [showRenameFolderModal, setShowRenameFolderModal] = useState(false);
+  const [sortMode, setSortModeState] = useState<SortMode>(getSortMode);
 
   const isDragEnabled = !filter;
 
@@ -102,13 +110,20 @@ export function useSidebarState() {
   }, [files]);
 
   const filteredItems = useMemo(() => {
-    if (!filter) return files;
+    if (!filter) return sortTreeItems(files, sortMode);
     const flatFiles = flattenFiles(files);
     const keyword = filter.toLowerCase();
-    return flatFiles.filter((f) =>
+    const matched = flatFiles.filter((f) =>
       (f.title || f.name).toLowerCase().includes(keyword),
     );
-  }, [files, filter, flattenFiles]);
+    matched.sort((a, b) => compareFiles(a, b, sortMode));
+    return matched;
+  }, [files, filter, flattenFiles, sortMode]);
+
+  const handleSetSortMode = useCallback((mode: SortMode) => {
+    setSortModeState(mode);
+    saveSortMode(mode);
+  }, []);
 
   const getDisplayTitle = useCallback(
     (file: FileItem) => file.title?.trim() || file.name.replace(/\.md$/i, ""),
@@ -594,6 +609,8 @@ export function useSidebarState() {
     setRenameFolderValue,
     showRenameFolderModal,
     setShowRenameFolderModal,
+    sortMode,
+    handleSetSortMode,
 
     // Handlers
     toggleFolder,
