@@ -214,6 +214,29 @@ describe("wechat copy css integration", () => {
     expect(heading!.style.paddingRight).not.toBe("48px");
   });
 
+  it("relocates horizontal page padding to hr in full pipeline", () => {
+    const html = "<p>段落</p><hr />";
+    const css = generateCSS({
+      ...defaultVariables,
+      pagePadding: 48,
+    });
+
+    const resolved = resolveInlineStyleVariablesForCopy(
+      processHtml(html, css, true, true),
+    );
+    const container = document.createElement("div");
+    container.innerHTML = resolved;
+
+    normalizeCopyContainer(container);
+
+    const hr = container.querySelector("hr") as HTMLElement | null;
+    expect(hr).toBeTruthy();
+    expect(hr!.style.marginLeft).toBe("48px");
+    expect(hr!.style.marginRight).toBe("48px");
+    expect(hr!.style.paddingLeft).not.toBe("48px");
+    expect(hr!.style.paddingRight).not.toBe("48px");
+  });
+
   it("propagates #wemd background-color to child blocks after normalization (#52)", () => {
     const html = "<p>段落</p><blockquote><p>引用</p></blockquote>";
     const css = `

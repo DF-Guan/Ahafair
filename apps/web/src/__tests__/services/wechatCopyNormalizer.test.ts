@@ -126,6 +126,34 @@ describe("wechatCopyNormalizer", () => {
     expect(heading.style.marginRight).toBe("16px");
   });
 
+  it("relocates root horizontal padding to hr via margin", () => {
+    const container = document.createElement("div");
+    container.innerHTML =
+      '<section id="wemd" style="padding: 0px 16px;"><hr style="border-top: 1px solid rgb(238, 238, 238);" /></section>';
+
+    normalizeCopyContainer(container);
+
+    const hr = container.querySelector("hr") as HTMLElement;
+    expect(hr).toBeTruthy();
+    expect(hr.style.marginLeft).toBe("16px");
+    expect(hr.style.marginRight).toBe("16px");
+    expect(hr.style.paddingLeft).toBe("");
+    expect(hr.style.paddingRight).toBe("");
+  });
+
+  it("keeps hr auto margins when relocating root horizontal padding", () => {
+    const container = document.createElement("div");
+    container.innerHTML =
+      '<section id="wemd" style="padding: 0px 16px;"><hr style="width: 20%; margin-left: auto; margin-right: auto; border-top: 1px solid rgb(238, 238, 238);" /></section>';
+
+    normalizeCopyContainer(container);
+
+    const hr = container.querySelector("hr") as HTMLElement;
+    expect(hr).toBeTruthy();
+    expect(hr.style.marginLeft).toBe("auto");
+    expect(hr.style.marginRight).toBe("auto");
+  });
+
   it("falls back to root padding when heading margin uses auto keyword", () => {
     const container = document.createElement("div");
     container.innerHTML =

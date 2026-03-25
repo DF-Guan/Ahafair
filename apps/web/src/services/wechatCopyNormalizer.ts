@@ -176,6 +176,30 @@ const mergeHorizontalPadding = (
   return `calc(${existingPadding} + ${rootPadding})`;
 };
 
+const isAutoMargin = (value: string): boolean => {
+  return value.trim().toLowerCase() === "auto";
+};
+
+const hasAutoHorizontalMargin = (node: HTMLElement): boolean => {
+  const marginLeft = node.style.getPropertyValue("margin-left");
+  const marginRight = node.style.getPropertyValue("margin-right");
+  if (isAutoMargin(marginLeft) || isAutoMargin(marginRight)) {
+    return true;
+  }
+
+  const margin = node.style.getPropertyValue("margin").trim().toLowerCase();
+  if (!margin) return false;
+  const tokens = margin.split(/\s+/);
+
+  if (tokens.length === 1) {
+    return tokens[0] === "auto";
+  }
+  if (tokens.length === 2 || tokens.length === 3) {
+    return tokens[1] === "auto";
+  }
+  return tokens[1] === "auto" || tokens[3] === "auto";
+};
+
 // ── DOM 变换 ────────────────────────────────────────
 
 const transformWemdRootSectionToDiv = (container: HTMLElement): void => {
@@ -240,6 +264,7 @@ const shouldUseMarginForHorizontalOffset = (node: HTMLElement): boolean => {
   const tagName = node.tagName;
   if (tagName === "BLOCKQUOTE") return true;
   if (tagName === "PRE") return true;
+  if (tagName === "HR") return true;
   if (node.classList.contains("callout")) return true;
   return false;
 };
@@ -275,15 +300,20 @@ const relocateRootPaddingToInnerWrapper = (container: HTMLElement): void => {
     elementChildren.forEach((child) => {
       const useMarginForHorizontalOffset =
         shouldUseMarginForHorizontalOffset(child);
+      const keepHrAutoMargins =
+        child.tagName === "HR" && hasAutoHorizontalMargin(child);
       if (!isZeroSpacing(paddingLeft)) {
         if (useMarginForHorizontalOffset) {
           const existingMarginLeft = child.style
             .getPropertyValue("margin-left")
             .trim();
-          child.style.setProperty(
-            "margin-left",
-            mergeHorizontalPadding(existingMarginLeft, paddingLeft),
-          );
+          // HR 的胶囊样式使用 margin:auto 居中，不能被页边距迁移覆盖。
+          if (!keepHrAutoMargins) {
+            child.style.setProperty(
+              "margin-left",
+              mergeHorizontalPadding(existingMarginLeft, paddingLeft),
+            );
+          }
         } else {
           const existingPaddingLeft = child.style
             .getPropertyValue("padding-left")
@@ -299,10 +329,13 @@ const relocateRootPaddingToInnerWrapper = (container: HTMLElement): void => {
           const existingMarginRight = child.style
             .getPropertyValue("margin-right")
             .trim();
-          child.style.setProperty(
-            "margin-right",
-            mergeHorizontalPadding(existingMarginRight, paddingRight),
-          );
+          // HR 的胶囊样式使用 margin:auto 居中，不能被页边距迁移覆盖。
+          if (!keepHrAutoMargins) {
+            child.style.setProperty(
+              "margin-right",
+              mergeHorizontalPadding(existingMarginRight, paddingRight),
+            );
+          }
         } else {
           const existingPaddingRight = child.style
             .getPropertyValue("padding-right")
