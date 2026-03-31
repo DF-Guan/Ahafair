@@ -14,6 +14,7 @@ import {
   getMermaidConfig,
   getThemedMermaidDiagram,
 } from "../../utils/mermaidConfig";
+import { renderTableBlocksForPreview } from "../../services/wechatTableRenderer";
 import "./MarkdownPreview.css";
 
 const SYNC_SCROLL_EVENT = "wemd-sync-scroll";
@@ -36,8 +37,20 @@ export function MarkdownPreview() {
   const isSyncingRef = useRef(false);
   const mermaidRenderIdRef = useRef(0);
 
+  // 获取当前主题对象（注意与 line 25 的 themeId 区分）
+  const currentTheme = useThemeStore(
+    (state) =>
+      state.customThemes.find((t) => t.id === state.themeId) ||
+      state.getAllThemes().find((t) => t.id === state.themeId),
+  );
+  const designerVars = currentTheme?.designerVariables;
+  const showMacBar = designerVars?.showMacBar ?? false;
+
   // 缓存 parser 实例，避免每次渲染都创建新实例
-  const parser = useMemo(() => createMarkdownParser(), []);
+  const parser = useMemo(
+    () => createMarkdownParser({ showMacBar }),
+    [showMacBar],
+  );
 
   useEffect(() => {
     const rawHtml = parser.render(markdown);
@@ -84,14 +97,6 @@ export function MarkdownPreview() {
     return () => clearTimeout(timer);
   }, [html, markdown]);
 
-  // 获取当前主题对象（注意与 line 25 的 themeId 区分）
-  const currentTheme = useThemeStore(
-    (state) =>
-      state.customThemes.find((t) => t.id === state.themeId) ||
-      state.getAllThemes().find((t) => t.id === state.themeId),
-  );
-
-  const designerVars = currentTheme?.designerVariables;
   const mermaidTheme = designerVars?.mermaidTheme || "base";
   const mermaidConfigKey = useMemo(() => mermaidTheme, [mermaidTheme]);
 
@@ -139,6 +144,22 @@ export function MarkdownPreview() {
 
     return () => clearTimeout(timer);
   }, [html, mermaidConfigKey, designerVars]);
+
+  // 表格渲染为图片：让预览效果与手机阅读体验一致
+  useEffect(() => {
+    if (!previewRef.current || !html) return;
+
+    const tables = previewRef.current.querySelectorAll(".table-container");
+    if (tables.length === 0) return;
+
+    const timer = setTimeout(() => {
+      if (previewRef.current) {
+        renderTableBlocksForPreview(previewRef.current);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [html]);
 
   // 处理预览栏滚动事件
   const handlePreviewScroll = useCallback(() => {

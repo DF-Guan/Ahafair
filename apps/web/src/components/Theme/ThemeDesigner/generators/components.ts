@@ -42,12 +42,13 @@ export function generateComponents(
 
 #wemd pre code {
   display: block;
-  background: var(--wemd-code-background);
+  background: transparent;
   font-size: var(--wemd-code-font-size);
-  padding: ${v.showMacBar ? "36px 16px 16px" : "16px"};
-  position: relative;
+  padding: 16px;
+  margin: 0;
+  overflow-x: auto;
   white-space: pre;
-  border-radius: 8px;
+  border-radius: 0;
   word-wrap: normal;
   word-break: keep-all;
   text-align: left;
@@ -59,24 +60,14 @@ export function generateComponents(
 #wemd pre.custom {
   position: relative;
   margin: var(--wemd-paragraph-margin) 0;
+  background: var(--wemd-code-background);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-${
-  v.showMacBar
-    ? `
-#wemd pre.custom::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ff5f56;
-  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
-  z-index: 10;
-}`
-    : ""
+#wemd pre.custom > .mac-sign {
+  display: ${v.showMacBar ? "block" : "none"};
+  line-height: 0;
 }
 
 ${getCodeThemeCSS(v.codeTheme)}

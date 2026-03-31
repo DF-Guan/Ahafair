@@ -24,15 +24,86 @@ import {
   stripCopyMetadata,
 } from "./wechatCopyNormalizer";
 import { renderMermaidBlocks } from "./wechatMermaidRenderer";
+import { renderTableBlocks } from "./wechatTableRenderer";
 
 // re-export 保持外部引用兼容
 export { normalizeCopyContainer, stripCopyMetadata };
+
+interface CopyToWechatOptions {
+  showMacBar?: boolean;
+}
 
 const buildCopyCss = (themeCss: string) => {
   if (!themeCss) return katexCss;
   // 复制前展开 CSS 变量为具体值，消除微信清洗 var() 导致的样式丢失
   const expandedCss = expandCSSVariables(themeCss);
   return `${expandedCss}\n${katexCss}`;
+};
+
+const loadImageFromDataUrl = async (src: string): Promise<HTMLImageElement> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("mac-sign SVG 转图片失败"));
+    img.src = src;
+  });
+};
+
+const svgMarkupToPngDataUrl = async (svg: SVGElement): Promise<string> => {
+  const svgClone = svg.cloneNode(true) as SVGElement;
+  const width = Number.parseFloat(svg.getAttribute("width") || "45") || 45;
+  const height = Number.parseFloat(svg.getAttribute("height") || "13") || 13;
+
+  svgClone.setAttribute("width", String(width));
+  svgClone.setAttribute("height", String(height));
+  if (!svgClone.getAttribute("xmlns")) {
+    svgClone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  }
+
+  const svgMarkup = new XMLSerializer().serializeToString(svgClone);
+  const svgDataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgMarkup)}`;
+  const img = await loadImageFromDataUrl(svgDataUrl);
+
+  const scale = 2;
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.ceil(width * scale);
+  canvas.height = Math.ceil(height * scale);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("mac-sign PNG 渲染失败");
+  }
+
+  ctx.scale(scale, scale);
+  ctx.drawImage(img, 0, 0, width, height);
+  return canvas.toDataURL("image/png");
+};
+
+const renderMacSignSvgsToImages = async (
+  container: HTMLElement,
+): Promise<void> => {
+  const svgs = Array.from(
+    container.querySelectorAll<SVGElement>(".mac-sign > svg"),
+  );
+  await Promise.all(
+    svgs.map(async (svg) => {
+      try {
+        const pngDataUrl = await svgMarkupToPngDataUrl(svg);
+        const img = document.createElement("img");
+        const width = svg.getAttribute("width") || "45";
+        const height = svg.getAttribute("height") || "13";
+        img.src = pngDataUrl;
+        img.alt = "";
+        img.style.display = "block";
+        img.style.width = /^\d+(\.\d+)?$/.test(width) ? `${width}px` : width;
+        img.style.height = /^\d+(\.\d+)?$/.test(height)
+          ? `${height}px`
+          : height;
+        svg.replaceWith(img);
+      } catch (error) {
+        console.warn("mac-sign SVG 转 PNG 失败，保留原 SVG", error);
+      }
+    }),
+  );
 };
 
 /**
@@ -102,6 +173,7 @@ const shouldPreferElectronClipboard = (): boolean => {
 export async function copyToWechat(
   markdown: string,
   css: string,
+  options: CopyToWechatOptions = {},
 ): Promise<void> {
   const container = document.createElement("div");
   container.style.position = "absolute";
@@ -118,7 +190,9 @@ export async function copyToWechat(
     if (shouldLoadMath) {
       await loadMathJax();
     }
-    const parser = createMarkdownParser();
+    const parser = createMarkdownParser({
+      showMacBar: options.showMacBar === true,
+    });
     const rawHtml = parser.render(markdown);
     const themedCss = buildCopyCss(css);
     const sanitizedCss = stripCounterPseudoRules(themedCss);
@@ -136,6 +210,8 @@ export async function copyToWechat(
 
     container.innerHTML = finalHtml;
     await renderMermaidBlocks(container);
+    await renderTableBlocks(container);
+    await renderMacSignSvgsToImages(container);
     normalizeCopyContainer(container);
 
     let copied = false;

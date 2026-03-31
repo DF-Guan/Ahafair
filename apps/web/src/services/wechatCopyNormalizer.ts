@@ -266,6 +266,7 @@ const shouldUseMarginForHorizontalOffset = (node: HTMLElement): boolean => {
   if (tagName === "PRE") return true;
   if (tagName === "HR") return true;
   if (node.classList.contains("callout")) return true;
+  if (node.classList.contains("table-container")) return true;
   return false;
 };
 

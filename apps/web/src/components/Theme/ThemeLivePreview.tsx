@@ -90,7 +90,11 @@ export const ThemeLivePreview = memo(function ThemeLivePreview({
   const currentMarkdown = useEditorStore((state) =>
     useCurrentArticle ? state.markdown : "",
   );
-  const parser = useMemo(() => createMarkdownParser(), []);
+  const showMacBar = designerVariables?.showMacBar ?? false;
+  const parser = useMemo(
+    () => createMarkdownParser({ showMacBar }),
+    [showMacBar],
+  );
   const uiTheme = useUITheme((state) => state.theme);
   const isDarkMode = uiTheme === "dark";
   const iframeRef = useRef<HTMLIFrameElement>(null);

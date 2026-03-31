@@ -181,9 +181,13 @@ export const useEditorStore = create<EditorStore>((set, get) => ({
     const { markdown } = get();
     const themeStore = useThemeStore.getState();
     const css = themeStore.getThemeCSS(themeStore.themeId);
+    const currentTheme =
+      themeStore.customThemes.find((t) => t.id === themeStore.themeId) ||
+      themeStore.getAllThemes().find((t) => t.id === themeStore.themeId);
+    const showMacBar = currentTheme?.designerVariables?.showMacBar ?? false;
 
     try {
-      await execCopyToWechat(markdown, css);
+      await execCopyToWechat(markdown, css, { showMacBar });
     } catch (error) {
       console.error("复制失败:", error);
     }
