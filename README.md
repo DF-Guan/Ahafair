@@ -156,12 +156,6 @@ Ahafair/
 
 ---
 
-## 📸 截图
-
-![screenshot](.github/assets/screenshot.png)
-
----
-
 ## 💬 反馈
 
 如有问题或建议，欢迎提交 [Issue](https://github.com/tenngoxars/Ahafair/issues)。
