@@ -33,7 +33,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build web frontend
-        run: pnpm --filter @wemd/web run build
+        run: pnpm --filter @ahafair/web run build
 
       - name: Install Electron deps
         run: cd apps/electron && pnpm install --frozen-lockfile
@@ -52,14 +52,14 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wemd-macos
+          name: ahafair-macos
           path: apps/electron/release/*.dmg
 
       - name: Publish GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          name: WeMD ${{ github.ref_name }}
+          name: Ahafair ${{ github.ref_name }}
           generate_release_notes: true
           files: apps/electron/release/*.dmg
 
@@ -84,7 +84,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build web frontend
-        run: pnpm --filter @wemd/web run build
+        run: pnpm --filter @ahafair/web run build
 
       - name: Install Electron deps
         run: cd apps/electron && pnpm install --frozen-lockfile
@@ -95,7 +95,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wemd-windows
+          name: ahafair-windows
           path: apps/electron/release/*.exe
 
       - name: Publish GitHub Release
@@ -125,7 +125,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build web frontend
-        run: pnpm --filter @wemd/web run build
+        run: pnpm --filter @ahafair/web run build
 
       - name: Install Electron deps
         run: cd apps/electron && pnpm install --frozen-lockfile
@@ -136,7 +136,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wemd-linux
+          name: ahafair-linux
           path: apps/electron/release/*.AppImage
 
       - name: Publish GitHub Release

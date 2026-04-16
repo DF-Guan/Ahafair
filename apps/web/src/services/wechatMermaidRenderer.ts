@@ -117,7 +117,7 @@ export const renderMermaidBlocks = async (
 
   ensureMermaidInitialized();
   const designerVariables = getThemeInfo();
-  const renderIdBase = `wemd-mermaid-${Date.now()}`;
+  const renderIdBase = `ahafair-mermaid-${Date.now()}`;
 
   // 构建 Mermaid 配置
   const initConfig = getMermaidConfig(designerVariables);
@@ -148,7 +148,7 @@ export const renderMermaidBlocks = async (
       figure.appendChild(img);
       block.parentNode?.replaceChild(figure, block);
     } catch (error) {
-      console.error("[WeMD] Mermaid render failed:", error);
+      console.error("[Ahafair] Mermaid render failed:", error);
     }
   }
 };

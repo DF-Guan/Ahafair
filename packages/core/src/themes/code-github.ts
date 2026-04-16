@@ -2,8 +2,8 @@ export const codeGithubTheme = `/*
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 */
 
-/* 代码块样式 - 需要添加 #wemd 前缀以匹配包装后的 HTML */
-#wemd .hljs {
+/* 代码块样式 - 需要添加 #ahafair 前缀以匹配包装后的 HTML */
+#ahafair .hljs {
   display: block;
   overflow-x: auto;
   padding: 16px;
@@ -11,94 +11,94 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   background: #f8f8f8;
 }
 
-#wemd .hljs-comment,
-#wemd .hljs-quote {
+#ahafair .hljs-comment,
+#ahafair .hljs-quote {
   color: #998;
   font-style: italic;
 }
 
-#wemd .hljs-keyword,
-#wemd .hljs-selector-tag,
-#wemd .hljs-subst {
+#ahafair .hljs-keyword,
+#ahafair .hljs-selector-tag,
+#ahafair .hljs-subst {
   color: #333;
   font-weight: bold;
 }
 
-#wemd .hljs-number,
-#wemd .hljs-literal,
-#wemd .hljs-variable,
-#wemd .hljs-template-variable,
-#wemd .hljs-tag .hljs-attr {
+#ahafair .hljs-number,
+#ahafair .hljs-literal,
+#ahafair .hljs-variable,
+#ahafair .hljs-template-variable,
+#ahafair .hljs-tag .hljs-attr {
   color: #008080;
 }
 
-#wemd .hljs-string,
-#wemd .hljs-doctag {
+#ahafair .hljs-string,
+#ahafair .hljs-doctag {
   color: #d14;
 }
 
-#wemd .hljs-title,
-#wemd .hljs-section,
-#wemd .hljs-selector-id {
+#ahafair .hljs-title,
+#ahafair .hljs-section,
+#ahafair .hljs-selector-id {
   color: #900;
   font-weight: bold;
 }
 
-#wemd .hljs-subst {
+#ahafair .hljs-subst {
   font-weight: normal;
 }
 
-#wemd .hljs-type,
-#wemd .hljs-class .hljs-title {
+#ahafair .hljs-type,
+#ahafair .hljs-class .hljs-title {
   color: #458;
   font-weight: bold;
 }
 
-#wemd .hljs-tag,
-#wemd .hljs-name,
-#wemd .hljs-attribute {
+#ahafair .hljs-tag,
+#ahafair .hljs-name,
+#ahafair .hljs-attribute {
   color: #000080;
   font-weight: normal;
 }
 
-#wemd .hljs-regexp,
-#wemd .hljs-link {
+#ahafair .hljs-regexp,
+#ahafair .hljs-link {
   color: #009926;
 }
 
-#wemd .hljs-symbol,
-#wemd .hljs-bullet {
+#ahafair .hljs-symbol,
+#ahafair .hljs-bullet {
   color: #990073;
 }
 
-#wemd .hljs-built_in,
-#wemd .hljs-builtin-name {
+#ahafair .hljs-built_in,
+#ahafair .hljs-builtin-name {
   color: #0086b3;
 }
 
-#wemd .hljs-meta {
+#ahafair .hljs-meta {
   color: #999;
   font-weight: bold;
 }
 
-#wemd .hljs-deletion {
+#ahafair .hljs-deletion {
   background: #fdd;
 }
 
-#wemd .hljs-addition {
+#ahafair .hljs-addition {
   background: #dfd;
 }
 
-#wemd .hljs-emphasis {
+#ahafair .hljs-emphasis {
   font-style: italic;
 }
 
-#wemd .hljs-strong {
+#ahafair .hljs-strong {
   font-weight: bold;
 }
 
 /* Imageflow CSS */
-#wemd .imageflow-layer1 {
+#ahafair .imageflow-layer1 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   /* white-space: normal; */
@@ -107,13 +107,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   overflow: hidden;
 }
 
-#wemd .imageflow-layer2 {
+#ahafair .imageflow-layer2 {
   white-space: nowrap;
   width: 100%;
   overflow-x: scroll;
 }
 
-#wemd .imageflow-layer3 {
+#ahafair .imageflow-layer3 {
   display: inline-block;
   word-wrap: break-word;
   white-space: normal;
@@ -123,7 +123,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   flex-shrink: 0;
 }
 
-#wemd .imageflow-img {
+#ahafair .imageflow-img {
   display: block;
   width: 100%;
   height: auto;
@@ -132,7 +132,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   border-radius: 4px;
 }
 
-#wemd .imageflow-caption {
+#ahafair .imageflow-caption {
   text-align: center;
   margin-top: 0px;
   padding-top: 0px;

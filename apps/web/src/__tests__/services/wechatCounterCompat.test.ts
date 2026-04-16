@@ -17,30 +17,30 @@ const mockStyle = (
 describe("wechatCounterCompat", () => {
   it("extracts counter pseudo rules from css", () => {
     const css = `
-      #wemd h2::before { content: 'Part' counter(counterh1); }
-      #wemd h3:before { content: counters(counterh2, "."); }
-      #wemd h4::before { content: "No Counter"; }
+      #ahafair h2::before { content: 'Part' counter(counterh1); }
+      #ahafair h3:before { content: counters(counterh2, "."); }
+      #ahafair h4::before { content: "No Counter"; }
     `;
 
     const rules = extractCounterPseudoRules(css);
     expect(rules.map((rule) => [rule.selector, rule.pseudo])).toEqual([
-      ["#wemd h2", "before"],
-      ["#wemd h3", "before"],
+      ["#ahafair h2", "before"],
+      ["#ahafair h3", "before"],
     ]);
   });
 
   it("strips only pseudo rules that contain counter content", () => {
     const css = `
-      #wemd h2::before { content: 'Part' counter(counterh1); color: #333; }
-      #wemd h2 { color: #333; }
-      #wemd h3::before { content: "纯文本"; color: #666; }
+      #ahafair h2::before { content: 'Part' counter(counterh1); color: #333; }
+      #ahafair h2 { color: #333; }
+      #ahafair h3::before { content: "纯文本"; color: #666; }
     `;
 
     const stripped = stripCounterPseudoRules(css);
     expect(stripped).not.toContain("counter(counterh1)");
-    expect(stripped).toContain("#wemd h2 { color: #333; }");
+    expect(stripped).toContain("#ahafair h2 { color: #333; }");
     expect(stripped).toContain(
-      '#wemd h3::before { content: "纯文本"; color: #666; }',
+      '#ahafair h3::before { content: "纯文本"; color: #666; }',
     );
   });
 
@@ -51,7 +51,7 @@ describe("wechatCounterCompat", () => {
       .mockImplementation((elt: Element, pseudoElt?: string | null) => {
         const tag = (elt as HTMLElement).tagName.toLowerCase();
         const id = (elt as HTMLElement).id;
-        if (!pseudoElt && tag === "section" && id === "wemd") {
+        if (!pseudoElt && tag === "section" && id === "ahafair") {
           return mockStyle("normal", {
             "counter-reset": "counterh1 0 counterh2 0",
             "counter-increment": "none",
@@ -108,7 +108,7 @@ describe("wechatCounterCompat", () => {
       <h3>三级标题B-1</h3>
     `;
     const css = `
-      #wemd h2::before {
+      #ahafair h2::before {
         counter-reset: counterh2;
         content: 'Part' counter(counterh1);
         counter-increment: counterh1;
@@ -116,7 +116,7 @@ describe("wechatCounterCompat", () => {
         background: rgb(37,132,181);
         padding: 2px 8px;
       }
-      #wemd h3::before {
+      #ahafair h3::before {
         counter-increment: counterh2;
         content: counter(counterh1) "." counter(counterh2) " ";
         color: rgb(123,189,207);
@@ -126,7 +126,7 @@ describe("wechatCounterCompat", () => {
 
     const result = materializeCounterPseudoContent(html, css);
 
-    expect(result.match(/data-wemd-counter-generated="before"/g)?.length).toBe(
+    expect(result.match(/data-ahafair-counter-generated="before"/g)?.length).toBe(
       5,
     );
     expect(result).toContain("Part1");
@@ -145,7 +145,7 @@ describe("wechatCounterCompat", () => {
       .mockImplementation((elt: Element, pseudoElt?: string | null) => {
         const tag = (elt as HTMLElement).tagName.toLowerCase();
         const id = (elt as HTMLElement).id;
-        if (!pseudoElt && tag === "section" && id === "wemd") {
+        if (!pseudoElt && tag === "section" && id === "ahafair") {
           return mockStyle("normal", {
             "counter-reset": "counterh1 0",
             "counter-increment": "none",
@@ -165,8 +165,8 @@ describe("wechatCounterCompat", () => {
 
     const html = "<h2>标题A</h2><h2>标题B</h2>";
     const css = `
-      #wemd h2::before { content: "Part" counter(counterh1); counter-increment: counterh1 999; }
-      #wemd h2::before { content: "Part" counter(counterh1); counter-increment: counterh1; }
+      #ahafair h2::before { content: "Part" counter(counterh1); counter-increment: counterh1 999; }
+      #ahafair h2::before { content: "Part" counter(counterh1); counter-increment: counterh1; }
     `;
 
     const result = materializeCounterPseudoContent(html, css);
@@ -184,7 +184,7 @@ describe("wechatCounterCompat", () => {
         const tag = (elt as HTMLElement).tagName.toLowerCase();
         const id = (elt as HTMLElement).id;
 
-        if (!pseudoElt && tag === "section" && id === "wemd") {
+        if (!pseudoElt && tag === "section" && id === "ahafair") {
           return mockStyle("normal", {
             "counter-reset": "sec 0 sub 0",
             "counter-increment": "none",
@@ -227,19 +227,19 @@ describe("wechatCounterCompat", () => {
       </div>
     `;
     const css = `
-      #wemd h2::before { content: counter(sec) " "; counter-increment: sec; }
-      #wemd h3::before { content: counters(sub, ".") " "; counter-increment: sub; }
+      #ahafair h2::before { content: counter(sec) " "; counter-increment: sec; }
+      #ahafair h3::before { content: counters(sub, ".") " "; counter-increment: sub; }
     `;
 
     const result = materializeCounterPseudoContent(html, css);
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">1 </span>章节',
+      '<span data-ahafair-counter-generated="before">1 </span>章节',
     );
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">1 </span>一级',
+      '<span data-ahafair-counter-generated="before">1 </span>一级',
     );
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">1.1 </span>二级',
+      '<span data-ahafair-counter-generated="before">1.1 </span>二级',
     );
 
     getComputedStyleSpy.mockRestore();
@@ -253,7 +253,7 @@ describe("wechatCounterCompat", () => {
         const id = (elt as HTMLElement).id;
         const className = (elt as HTMLElement).className;
 
-        if (!pseudoElt && tag === "section" && id === "wemd") {
+        if (!pseudoElt && tag === "section" && id === "ahafair") {
           return mockStyle("normal", {
             "counter-reset": "sec 0",
             "counter-increment": "none",
@@ -290,13 +290,13 @@ describe("wechatCounterCompat", () => {
       </div>
     `;
     const css = `
-      #wemd h2::before { content: counter(sec) " "; counter-increment: sec; }
-      #wemd h3::before { content: counters(sec, ", ") " "; counter-increment: sec; }
+      #ahafair h2::before { content: counter(sec) " "; counter-increment: sec; }
+      #ahafair h3::before { content: counters(sec, ", ") " "; counter-increment: sec; }
     `;
 
     const result = materializeCounterPseudoContent(html, css);
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">1, 1 </span>子级',
+      '<span data-ahafair-counter-generated="before">1, 1 </span>子级',
     );
 
     getComputedStyleSpy.mockRestore();
@@ -310,7 +310,7 @@ describe("wechatCounterCompat", () => {
         const id = (elt as HTMLElement).id;
         const className = (elt as HTMLElement).className;
 
-        if (!pseudoElt && tag === "section" && id === "wemd") {
+        if (!pseudoElt && tag === "section" && id === "ahafair") {
           return mockStyle("normal", {
             "counter-reset": "part 0 item 1",
             "counter-increment": "none",
@@ -349,22 +349,22 @@ describe("wechatCounterCompat", () => {
       </div>
     `;
     const css = `
-      #wemd h2::before { content: counter(part, upper-roman) " "; counter-increment: part; }
-      #wemd h3::before { content: counters(item, "-", lower-alpha) " "; counter-increment: item; }
+      #ahafair h2::before { content: counter(part, upper-roman) " "; counter-increment: part; }
+      #ahafair h3::before { content: counters(item, "-", lower-alpha) " "; counter-increment: item; }
     `;
 
     const result = materializeCounterPseudoContent(html, css);
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">I </span>章节一',
+      '<span data-ahafair-counter-generated="before">I </span>章节一',
     );
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">II </span>章节二',
+      '<span data-ahafair-counter-generated="before">II </span>章节二',
     );
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">a-a </span>条目A',
+      '<span data-ahafair-counter-generated="before">a-a </span>条目A',
     );
     expect(result).toContain(
-      '<span data-wemd-counter-generated="before">a-b </span>条目B',
+      '<span data-ahafair-counter-generated="before">a-b </span>条目B',
     );
 
     getComputedStyleSpy.mockRestore();

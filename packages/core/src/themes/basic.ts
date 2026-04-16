@@ -1,7 +1,7 @@
 export const basicTheme = `/* 默认样式，最佳实践 */
 
 /* 全局属性 */
-#wemd {
+#ahafair {
   font-size: 16px;
   color: #000000;
   padding: 0 8px;
@@ -15,7 +15,7 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 段落 */
-#wemd p {
+#ahafair p {
   font-size: 16px;
   margin: 0;
   line-height: 26px;
@@ -23,75 +23,75 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 标题 */
-#wemd h1,
-#wemd h2,
-#wemd h3,
-#wemd h4,
-#wemd h5,
-#wemd h6 {
+#ahafair h1,
+#ahafair h2,
+#ahafair h3,
+#ahafair h4,
+#ahafair h5,
+#ahafair h6 {
   margin-top: 30px;
   margin-bottom: 15px;
   padding: 0px;
   font-weight: bold;
   color: #000000;
 }
-#wemd h1 {
+#ahafair h1 {
   font-size: 24px;
 }
-#wemd h2 {
+#ahafair h2 {
   font-size: 22px;
 }
-#wemd h3 {
+#ahafair h3 {
   font-size: 20px;
 }
-#wemd h4 {
+#ahafair h4 {
   font-size: 18px;
 }
-#wemd h5 {
+#ahafair h5 {
   font-size: 16px;
 }
-#wemd h6 {
+#ahafair h6 {
   font-size: 16px;
 }
 
-#wemd h1 .prefix,
-#wemd h2 .prefix,
-#wemd h3 .prefix,
-#wemd h4 .prefix,
-#wemd h5 .prefix,
-#wemd h6 .prefix {
+#ahafair h1 .prefix,
+#ahafair h2 .prefix,
+#ahafair h3 .prefix,
+#ahafair h4 .prefix,
+#ahafair h5 .prefix,
+#ahafair h6 .prefix {
   display: none;
 }
 
-#wemd h1 .suffix,
-#wemd h2 .suffix,
-#wemd h3 .suffix,
-#wemd h4 .suffix,
-#wemd h5 .suffix,
-#wemd h6 .suffix {
+#ahafair h1 .suffix,
+#ahafair h2 .suffix,
+#ahafair h3 .suffix,
+#ahafair h4 .suffix,
+#ahafair h5 .suffix,
+#ahafair h6 .suffix {
   display: none;
 }
 
 /* 列表 */
-#wemd ul,
-#wemd ol {
+#ahafair ul,
+#ahafair ol {
   margin-top: 8px;
   margin-bottom: 8px;
   padding-left: 25px;
   color: #000000;
 }
-#wemd ul {
+#ahafair ul {
   list-style-type: disc;
 }
-#wemd ul ul {
+#ahafair ul ul {
   list-style-type: square;
 }
 
-#wemd ol {
+#ahafair ol {
   list-style-type: decimal;
 }
 
-#wemd li section {
+#ahafair li section {
   margin-top: 5px;
   margin-bottom: 5px;
   line-height: 26px;
@@ -101,11 +101,11 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 引用 */
-#wemd blockquote {
+#ahafair blockquote {
   border: none;
 }
 
-#wemd .multiquote-1 {
+#ahafair .multiquote-1 {
   display: block;
   font-size: 0.9em;
   overflow: auto;
@@ -121,42 +121,42 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   margin-top: 20px;
 }
 
-#wemd .multiquote-1 p {
+#ahafair .multiquote-1 p {
   margin: 0px;
   color: #000000;
   line-height: 26px;
 }
 
-#wemd .multiquote-2 {
+#ahafair .multiquote-2 {
   box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
   padding: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
 }
 
-#wemd .multiquote-3 {
+#ahafair .multiquote-3 {
   box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
   padding: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
 }
 
-#wemd .multiquote-3 p {
+#ahafair .multiquote-3 p {
   text-align: center;
 }
 
-#wemd .multiquote-3 h3 {
+#ahafair .multiquote-3 h3 {
   text-align: center;
 }
 
-#wemd .table-of-contents a {
+#ahafair .table-of-contents a {
   border: none;
   color: #000000;
   font-weight: normal;
 }
 
 /* 链接 */
-#wemd a {
+#ahafair a {
   text-decoration: none;
   color: #1e6bb8;
   word-wrap: break-word;
@@ -165,38 +165,38 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 加粗 */
-#wemd strong {
+#ahafair strong {
   font-weight: bold;
   color: #000000;
 }
 
 /* 斜体 */
-#wemd em {
+#ahafair em {
   font-style: italic;
   color: #000000;
 }
 
 /* 加粗斜体 */
-#wemd em strong {
+#ahafair em strong {
   font-weight: bold;
   color: #000000;
 }
 
 /* 删除线 */
-#wemd del {
+#ahafair del {
   font-style: italic;
   color: #000000;
 }
 
 /* 下划线 */
-#wemd u {
+#ahafair u {
   text-decoration: underline;
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
 }
 
 /* 分隔线 */
-#wemd hr {
+#ahafair hr {
   height: 1px;
   margin: 0;
   margin-top: 10px;
@@ -206,21 +206,21 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 代码块容器 */
-#wemd pre {
+#ahafair pre {
   margin-top: 10px;
   margin-bottom: 10px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-#wemd pre.custom {
+#ahafair pre.custom {
   padding: 0;
   border-radius: 6px;
   overflow: hidden;
   overflow-x: auto;
 }
 
-#wemd pre code {
+#ahafair pre code {
   display: block;
   font-family: Operator Mono, Consolas, Monaco, Menlo, monospace;
   border-radius: 0px;
@@ -230,13 +230,13 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   -webkit-overflow-scrolling: touch;
 }
 
-#wemd pre code span {
+#ahafair pre code span {
   line-height: 26px;
 }
 
 /* 行内代码 */
-#wemd p code,
-#wemd li code {
+#ahafair p code,
+#ahafair li code {
   font-size: 14px;
   word-wrap: break-word;
   padding: 2px 4px;
@@ -249,21 +249,21 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 图片 */
-#wemd img {
+#ahafair img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
 }
 
 /* 图片 */
-#wemd figure {
+#ahafair figure {
   margin: 0;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 /* 图片描述文字 */
-#wemd figcaption {
+#ahafair figcaption {
   margin-top: 5px;
   text-align: center;
   color: #888;
@@ -272,63 +272,63 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 
 
 /* 表格容器 */
-#wemd .table-container{
+#ahafair .table-container{
   overflow-x: auto;
 }
 
 /* 表格 */
-#wemd table {
+#ahafair table {
   display: table;
   text-align: left;
 }
-#wemd tbody {
+#ahafair tbody {
   border: 0;
 }
 
-#wemd table tr {
+#ahafair table tr {
   border: 0;
   border-top: 1px solid #ccc;
   background-color: #ffffff;
 }
 
-#wemd table tr:nth-child(2n) {
+#ahafair table tr:nth-child(2n) {
   background-color: #F8F8F8;
 }
 
-#wemd table tr th,
-#wemd table tr td {
+#ahafair table tr th,
+#ahafair table tr td {
   font-size: 16px;
   border: 1px solid #ccc;
   padding: 5px 10px;
   text-align: left;
 }
 
-#wemd table tr th {
+#ahafair table tr th {
   font-weight: bold;
   background-color: #f0f0f0;
 }
 
 /* 表格最小列宽4个汉字 */
-#wemd table tr th:nth-of-type(n),
-#wemd table tr td:nth-of-type(n){
+#ahafair table tr th:nth-of-type(n),
+#ahafair table tr td:nth-of-type(n){
   min-width:85px;
 }
 
-#wemd .footnote-word {
+#ahafair .footnote-word {
   color: #1e6bb8;
   font-weight: bold;
 }
 
-#wemd .footnote-ref {
+#ahafair .footnote-ref {
   color: #1e6bb8;
   font-weight: bold;
 }
 
-#wemd .footnote-item {
+#ahafair .footnote-item {
   display: flex;
 }
 
-#wemd .footnote-num {
+#ahafair .footnote-num {
   display: inline;
   width: 10%; /*神奇，50px就不可以*/
   background: none;
@@ -338,7 +338,7 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   font-family: ptima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#wemd .footnote-item p {
+#ahafair .footnote-item p {
   display: inline;
   font-size: 14px;
   width: 90%;
@@ -350,17 +350,17 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   width: calc(100%-50)
 }
 
-#wemd sub, sup {
+#ahafair sub, sup {
   line-height: 0;
 }
 
-#wemd .footnotes-sep:before {
+#ahafair .footnotes-sep:before {
   content: "参考资料";
   display: block;
 }
 
 /* 解决公式问题 */
-#wemd .block-equation {
+#ahafair .block-equation {
   display:block;
   text-align: center;
   overflow: auto;
@@ -368,18 +368,18 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   -webkit-overflow-scrolling: touch;
 }
 
-#wemd .block-equation svg {
+#ahafair .block-equation svg {
   max-width: 300% !important;
   -webkit-overflow-scrolling: touch;
 }
 
-#wemd .inline-equation {
+#ahafair .inline-equation {
 }
 
-#wemd .inline-equation svg {
+#ahafair .inline-equation svg {
 }
 
-#wemd .imageflow-layer1 {
+#ahafair .imageflow-layer1 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   white-space: normal;
@@ -388,13 +388,13 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   overflow: hidden;
 }
 
-#wemd .imageflow-layer2 {
+#ahafair .imageflow-layer2 {
   white-space: nowrap;
   width: 100%;
   overflow-x: scroll;
 }
 
-#wemd .imageflow-layer3 {
+#ahafair .imageflow-layer3 {
   display: inline-block;
   word-wrap: break-word;
   white-space: normal;
@@ -404,7 +404,7 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   flex-shrink: 0;
 }
 
-#wemd .imageflow-img {
+#ahafair .imageflow-img {
   display: block;
   width: 100%;
   height: auto;
@@ -413,26 +413,26 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   border-radius: 4px;
 }
 
-#wemd .imageflow-caption {
+#ahafair .imageflow-caption {
   text-align: center;
   margin-top: 0px;
   padding-top: 0px;
   color: #888;
 }
 
-#wemd .nice-suffix-juejin-container {
+#ahafair .nice-suffix-juejin-container {
   margin-top: 20px !important;
 }
 
-#wemd figure a {
+#ahafair figure a {
   border: none;
 }
 
-#wemd figure a img {
+#ahafair figure a img {
   margin: 0px;
 }
 
-#wemd figure {
+#ahafair figure {
   display:flex;
   flex-direction: column;
   justify-content: center;
@@ -440,14 +440,14 @@ export const basicTheme = `/* 默认样式，最佳实践 */
 }
 
 /* 图片链接嵌套 */
-#wemd figure a {
+#ahafair figure a {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 /* 图片链接嵌套，图片解释 */
-#wemd figure a + figcaption {
+#ahafair figure a + figcaption {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -459,7 +459,7 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   z-index: 20;
 }
 
-#wemd .callout {
+#ahafair .callout {
   margin: 24px 0;
   padding: 18px 20px;
   border-radius: 16px;
@@ -468,7 +468,7 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
 }
 
-#wemd .callout-title {
+#ahafair .callout-title {
   font-weight: 600;
   margin-bottom: 8px;
   display: flex;
@@ -477,18 +477,18 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   letter-spacing: 0.05em;
 }
 
-#wemd .callout-icon { margin-right: 8px;
+#ahafair .callout-icon { margin-right: 8px;
   font-size: 18px;
 }
 
-#wemd .callout-note { border-left: 4px solid #6366f1; background: #f5f5ff; }
-#wemd .callout-tip { border-left: 4px solid #10b981; background: #ecfdf5; }
-#wemd .callout-important { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
-#wemd .callout-warning { border-left: 4px solid #f59e0b; background: #fffbeb; }
-#wemd .callout-caution { border-left: 4px solid #ef4444; background: #fff5f5; }
+#ahafair .callout-note { border-left: 4px solid #6366f1; background: #f5f5ff; }
+#ahafair .callout-tip { border-left: 4px solid #10b981; background: #ecfdf5; }
+#ahafair .callout-important { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
+#ahafair .callout-warning { border-left: 4px solid #f59e0b; background: #fffbeb; }
+#ahafair .callout-caution { border-left: 4px solid #ef4444; background: #fff5f5; }
 
 
-#wemd .task-list-item {
+#ahafair .task-list-item {
   list-style: none;
   margin-left: -1.2em;
   margin-bottom: 6px;
@@ -497,7 +497,7 @@ export const basicTheme = `/* 默认样式，最佳实践 */
   align-items: flex-start;
 }
 
-#wemd .task-list-item input[type='checkbox'] {
+#ahafair .task-list-item input[type='checkbox'] {
   margin-top: 4px;
   pointer-events: none;
 }

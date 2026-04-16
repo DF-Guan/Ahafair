@@ -1,13 +1,20 @@
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- 1. 背景：极淡的冷灰色块 (Premium Light Grey) -->
-  <!-- 这种灰色比纯白更有质感，在白色网页背景上也能看清轮廓 -->
-  <path d="M40 20 H160 C171 20 180 29 180 40 V140 C180 151 171 160 160 160 H140 L140 185 L110 160 H40 C29 160 20 151 20 140 V40 C20 29 29 20 40 20 Z" fill="#F2F4F7"/>
-  
-  <!-- 2. 内部装饰：顶部的绿色状态条 -->
-  <!-- 在浅色背景上，这个绿色会显得非常清脆 -->
-  <rect x="50" y="50" width="100" height="12" rx="6" fill="#07C160"/>
-  
-  <!-- 3. 核心符号：Markdown 的 "M" -->
-  <!-- 使用深黑色，形成“纸上墨迹”的高级阅读感 -->
-  <path d="M60 85 L60 130 H80 L80 110 L100 130 L120 110 L120 130 H140 L140 85 L120 85 L100 105 L80 85 Z" fill="#1A1A1A"/>
+  <!-- 银色背景，圆润 Apple Style -->
+  <rect width="200" height="200" rx="44" fill="url(#silverGradL)"/>
+
+  <defs>
+    <linearGradient id="silverGradL" x1="0" y1="0" x2="0" y2="200">
+      <stop offset="0%" stop-color="#F5F5F7"/>
+      <stop offset="100%" stop-color="#E8E8EC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 黑色圆角矩形 -->
+  <rect x="40" y="40" width="120" height="120" rx="28" fill="#1A1A1A"/>
+
+  <!-- 高光 -->
+  <rect x="40" y="40" width="120" height="60" rx="28" fill="white" fill-opacity="0.08"/>
+
+  <!-- 字母 A -->
+  <path d="M100 65 L78 130 H92 L97 115 H103 L108 130 H122 L100 65 Z M97 105 L100 92 L103 105 H97 Z" fill="white"/>
 </svg>

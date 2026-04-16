@@ -74,8 +74,8 @@ export interface ElectronAPI {
   };
 }
 
-export const WORKSPACE_KEY = "wemd-workspace-path";
-export const LAST_FILE_KEY = "wemd-last-file-path";
+export const WORKSPACE_KEY = "ahafair-workspace-path";
+export const LAST_FILE_KEY = "ahafair-last-file-path";
 
 export const getElectron = (): ElectronAPI | null => {
   return window.electron as unknown as ElectronAPI | null;

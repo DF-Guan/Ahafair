@@ -10,62 +10,75 @@ body,
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light;
 
   /* ========================================
-     DEFAULT UI THEME (Current Style)
+     APPLE STYLE UI THEME
+     银色 + 黑色 · 简约科技风
      ======================================== */
 
-  /* Colors */
-  --ui-bg-page: #f8f9fa;
-  --ui-bg-primary: #ffffff;
-  --ui-bg-secondary: #f6f8fb;
-  --ui-bg-tertiary: #eef2f6;
-  --ui-bg-card-muted: #f1f5f9;
-  --ui-bg-hover: #e6f5eb;
+  /* --- Colors 银色系 --- */
+  --ui-bg-page: #F5F5F7;
+  --ui-bg-primary: #FFFFFF;
+  --ui-bg-secondary: #F0F0F3;
+  --ui-bg-tertiary: #E8E8EC;
+  --ui-bg-card-muted: #FAFAFA;
+  --ui-bg-hover: #ECECEF;
 
-  --ui-text-primary: #0f172a;
-  --ui-text-secondary: #334155;
-  --ui-text-tertiary: #64748b;
+  --ui-text-primary: #1D1D1F;
+  --ui-text-secondary: #515154;
+  --ui-text-tertiary: #86868B;
 
-  --ui-border-color: #e2e8f0;
-  --ui-border-light: #e2e8f0;
+  --ui-border-color: #D2D2D7;
+  --ui-border-light: #E5E5EA;
 
-  --ui-accent-primary: #07c160;
-  --ui-accent-gradient: linear-gradient(135deg, #07c160 0%, #05a850 100%);
+  /* --- Accent: 黑色系 --- */
+  --ui-accent-primary: #1D1D1F;
+  --ui-accent-gradient: linear-gradient(135deg, #2D2D2D 0%, #1D1D1F 100%);
 
-  /* Borders & Radius */
+  /* --- Borders & Radius Apple风格 --- */
   --ui-border-width: 1px;
-  --ui-radius-sm: 8px;
-  --ui-radius-md: 12px;
-  --ui-radius-lg: 16px;
-  --ui-radius-xl: 24px;
+  --ui-radius-sm: 10px;
+  --ui-radius-md: 14px;
+  --ui-radius-lg: 18px;
+  --ui-radius-xl: 22px;
   --ui-radius-pill: 999px;
 
-  /* Shadows */
-  --ui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  /* --- Apple式阴影（多层柔和阴影） --- */
+  --ui-shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.06);
   --ui-shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.04);
   --ui-shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 4px 10px rgba(0, 0, 0, 0.04),
+    0 0 0 0.5px rgba(0, 0, 0, 0.03);
   --ui-shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    0 20px 50px rgba(0, 0, 0, 0.10),
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 0 0 0.5px rgba(0, 0, 0, 0.02);
+  --ui-shadow-premium:
+    0 24px 60px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 0 0 0.5px rgba(0, 0, 0, 0.03);
 
-  /* Fonts */
+  /* --- Fonts --- */
   --ui-font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Roboto",
-    "Helvetica Neue", sans-serif;
-  --ui-font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+  --ui-font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Menlo", monospace;
 
-  /* Spacing */
+  /* --- Spacing --- */
   --ui-spacing-unit: 8px;
-  --ui-glass-blur: blur(20px);
+  --ui-glass-blur: blur(24px) saturate(180%);
 
-  /* Legacy variables for backward compatibility */
+  /* --- Legacy variables --- */
   --bg-page: var(--ui-bg-page);
   --bg-primary: var(--ui-bg-primary);
   --bg-secondary: var(--ui-bg-secondary);
@@ -83,6 +96,7 @@ body,
   --shadow-md: var(--ui-shadow-md);
   --shadow-lg: var(--ui-shadow-lg);
   --shadow-xl: var(--ui-shadow-xl);
+  --shadow-premium: var(--ui-shadow-premium);
   --radius-sm: var(--ui-radius-sm);
   --radius-md: var(--ui-radius-md);
   --radius-lg: var(--ui-radius-lg);
@@ -104,59 +118,58 @@ body,
 }
 
 /* ========================================
-   DARK UI THEME (参考 VS Code 配色)
+   DARK UI THEME Apple深空黑色系
    ======================================== */
 [data-ui-theme="dark"] {
   color-scheme: dark;
 
-  /* Colors - VS Code 风格深色背景（不那么刺眼） */
-  --ui-bg-page: #1e1e1e;
-  --ui-bg-primary: #252526;
-  --ui-bg-secondary: #2d2d30;
-  --ui-bg-tertiary: #333333;
-  --ui-bg-card-muted: #2a2a2b;
-  --ui-bg-hover: #2a3a2e;
+  /* Apple深空黑 */
+  --ui-bg-page: #000000;
+  --ui-bg-primary: #1C1C1E;
+  --ui-bg-secondary: #2C2C2E;
+  --ui-bg-tertiary: #3A3A3C;
+  --ui-bg-card-muted: #242426;
+  --ui-bg-hover: #2E2E30;
 
-  /* Colors - 柔和的浅色文字 */
-  --ui-text-primary: #d4d4d4;
-  --ui-text-secondary: #9d9d9d;
-  --ui-text-tertiary: #6a6a6a;
+  /* 文字 - 高对比度白 */
+  --ui-text-primary: #F5F5F7;
+  --ui-text-secondary: #A1A1A6;
+  --ui-text-tertiary: #636366;
 
-  /* 边框 - 柔和的深色调 */
-  --ui-border-color: #3c3c3c;
-  --ui-border-light: #404040;
+  /* 边框 - 极淡灰 */
+  --ui-border-color: #38383A;
+  --ui-border-light: #48484A;
 
-  /* 保持微信绿作为强调色 */
-  --ui-accent-primary: #07c160;
-  --ui-accent-gradient: linear-gradient(135deg, #07c160 0%, #05a850 100%);
+  /* 保持黑色系强调 */
+  --ui-accent-primary: #F5F5F7;
+  --ui-accent-gradient: linear-gradient(135deg, #A1A1A6 0%, #636366 100%);
 
-  /* Borders & Radius - 保持与默认主题一致 */
-  --ui-border-width: 1px;
-  --ui-radius-sm: 8px;
-  --ui-radius-md: 12px;
-  --ui-radius-lg: 16px;
-  --ui-radius-xl: 24px;
-  --ui-radius-pill: 999px;
-
-  /* Shadows - 深色模式阴影 */
-  --ui-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  /* Apple深色阴影 */
+  --ui-shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3);
   --ui-shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.4);
   --ui-shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    0 4px 10px rgba(0, 0, 0, 0.5);
   --ui-shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-
-  /* Fonts - 保持默认 */
-  --ui-font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Roboto",
-    "Helvetica Neue", sans-serif;
-  --ui-font-mono: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
-  --ui-spacing-unit: 8px;
-  --ui-glass-blur: blur(20px);
+    0 20px 50px rgba(0, 0, 0, 0.7),
+    0 8px 20px rgba(0, 0, 0, 0.6);
+  --ui-shadow-premium:
+    0 24px 60px rgba(0, 0, 0, 0.8),
+    0 8px 24px rgba(0, 0, 0, 0.7);
 
   /* 玻璃效果变量 - 深色模式 */
-  --glass-bg: rgba(37, 37, 38, 0.95);
-  --glass-border: rgba(60, 60, 60, 0.6);
-  --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(28, 28, 30, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* 亮色模式玻璃效果 */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }

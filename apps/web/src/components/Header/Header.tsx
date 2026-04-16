@@ -54,7 +54,7 @@ const structuralismLogoSrc = `${import.meta.env.BASE_URL}favicon-light.svg`;
 const StructuralismLogoMark = () => (
   <img
     src={structuralismLogoSrc}
-    alt="WeMD Logo"
+    alt="Ahafair Logo"
     width={40}
     height={40}
     style={{ display: "block" }}
@@ -124,7 +124,7 @@ export function Header() {
   const [autoHide, setAutoHide] = useState(() => {
     if (typeof window === "undefined") return false;
     try {
-      return window.localStorage.getItem("wemd-header-autohide") === "true";
+      return window.localStorage.getItem("ahafair-header-autohide") === "true";
     } catch {
       return false;
     }
@@ -134,7 +134,7 @@ export function Header() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
-      window.localStorage.setItem("wemd-header-autohide", String(autoHide));
+      window.localStorage.setItem("ahafair-header-autohide", String(autoHide));
     } catch {
       // 忽略存储不可用的场景（如隐私模式）
     }
@@ -214,7 +214,7 @@ export function Header() {
               <DefaultLogoMark />
             )}
             <div className="logo-info">
-              <span className="logo-text">WeMD</span>
+              <span className="logo-text">Ahafair</span>
               <span className="logo-subtitle">公众号 Markdown 排版编辑器</span>
             </div>
           </div>

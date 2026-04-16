@@ -1,11 +1,11 @@
 /* ============================================
- * WeMD 主题模板
+ * Ahafair 主题模板
  * ============================================
  * 
  * 使用说明：
  * 1. 修改下方的样式定义，创建你的自定义主题
- * 2. 所有选择器必须以 #wemd 开头
- * 3. 代码块使用 #wemd pre code.hljs，不要设置全局 color
+ * 2. 所有选择器必须以 #ahafair 开头
+ * 3. 代码块使用 #ahafair pre code.hljs，不要设置全局 color
  * 
  * ============================================
  * 🌙 深色模式说明（微信兼容）
@@ -38,97 +38,97 @@
  * 1. 全局容器样式
  * ============================================
  */
-#wemd {
+#ahafair {
   /* ========================================
      * CSS 变量 - 可直接修改这些值来自定义样式
      * 变量说明：apps/web/src/components/Theme/ThemeDesigner/VARIABLES.md
      * ======================================== */
   /* 全局 */
-  --wemd-page-padding: 20px;
-  --wemd-font-size: 16px;
-  --wemd-line-height: 1.7;
-  --wemd-paragraph-margin: 16px;
-  --wemd-paragraph-padding: 0px;
-  --wemd-text-color: #333;
-  --wemd-primary-color: #1e6bb8;
-  --wemd-primary-color-20: rgba(30, 107, 184, 0.12);
-  --wemd-primary-color-30: rgba(30, 107, 184, 0.18);
-  --wemd-primary-color-50: #1e6bb850;
-  --wemd-letter-spacing: 0px;
-  --wemd-underline-style: solid;
-  --wemd-underline-color: currentColor;
+  --ahafair-page-padding: 20px;
+  --ahafair-font-size: 16px;
+  --ahafair-line-height: 1.7;
+  --ahafair-paragraph-margin: 16px;
+  --ahafair-paragraph-padding: 0px;
+  --ahafair-text-color: #333;
+  --ahafair-primary-color: #1e6bb8;
+  --ahafair-primary-color-20: rgba(30, 107, 184, 0.12);
+  --ahafair-primary-color-30: rgba(30, 107, 184, 0.18);
+  --ahafair-primary-color-50: #1e6bb850;
+  --ahafair-letter-spacing: 0px;
+  --ahafair-underline-style: solid;
+  --ahafair-underline-color: currentColor;
 
   /* 标题 */
-  --wemd-h1-font-size: 24px;
-  --wemd-h1-color: #000;
-  --wemd-h1-margin-top: 40px;
-  --wemd-h1-margin-bottom: 30px;
-  --wemd-h2-font-size: 20px;
-  --wemd-h2-color: #333;
-  --wemd-h2-margin-top: 30px;
-  --wemd-h2-margin-bottom: 20px;
-  --wemd-h3-font-size: 18px;
-  --wemd-h3-color: #666;
-  --wemd-h3-margin-top: 25px;
-  --wemd-h3-margin-bottom: 15px;
-  --wemd-h4-font-size: 16px;
-  --wemd-h4-color: #666;
-  --wemd-h4-margin-top: 20px;
-  --wemd-h4-margin-bottom: 10px;
+  --ahafair-h1-font-size: 24px;
+  --ahafair-h1-color: #000;
+  --ahafair-h1-margin-top: 40px;
+  --ahafair-h1-margin-bottom: 30px;
+  --ahafair-h2-font-size: 20px;
+  --ahafair-h2-color: #333;
+  --ahafair-h2-margin-top: 30px;
+  --ahafair-h2-margin-bottom: 20px;
+  --ahafair-h3-font-size: 18px;
+  --ahafair-h3-color: #666;
+  --ahafair-h3-margin-top: 25px;
+  --ahafair-h3-margin-bottom: 15px;
+  --ahafair-h4-font-size: 16px;
+  --ahafair-h4-color: #666;
+  --ahafair-h4-margin-top: 20px;
+  --ahafair-h4-margin-bottom: 10px;
 
   /* 代码 */
-  --wemd-code-background: #f5f5f5;
-  --wemd-code-font-size: 13px;
-  --wemd-inline-code-color: #e83e8c;
-  --wemd-inline-code-background: #f8f9fa;
+  --ahafair-code-background: #f5f5f5;
+  --ahafair-code-font-size: 13px;
+  --ahafair-inline-code-color: #e83e8c;
+  --ahafair-inline-code-background: #f8f9fa;
 
   /* 引用 */
-  --wemd-quote-background: #f5f5f5;
-  --wemd-quote-border-color: #ddd;
-  --wemd-quote-border-width: 4px;
-  --wemd-quote-border-style: solid;
-  --wemd-quote-text-color: #666;
-  --wemd-quote-font-size: 15px;
-  --wemd-quote-line-height: 1.6;
-  --wemd-quote-padding-x: 20px;
-  --wemd-quote-padding-y: 16px;
+  --ahafair-quote-background: #f5f5f5;
+  --ahafair-quote-border-color: #ddd;
+  --ahafair-quote-border-width: 4px;
+  --ahafair-quote-border-style: solid;
+  --ahafair-quote-text-color: #666;
+  --ahafair-quote-font-size: 15px;
+  --ahafair-quote-line-height: 1.6;
+  --ahafair-quote-padding-x: 20px;
+  --ahafair-quote-padding-y: 16px;
 
   /* 图片 */
-  --wemd-image-margin: 20px;
-  --wemd-image-border-radius: 4px;
-  --wemd-image-caption-color: #666;
-  --wemd-image-caption-font-size: 14px;
-  --wemd-image-caption-align: center;
+  --ahafair-image-margin: 20px;
+  --ahafair-image-border-radius: 4px;
+  --ahafair-image-caption-color: #666;
+  --ahafair-image-caption-font-size: 14px;
+  --ahafair-image-caption-align: center;
 
   /* 链接与文本 */
-  --wemd-link-color: #1e6bb8;
-  --wemd-italic-color: #333;
-  --wemd-del-color: #999;
-  --wemd-mark-background: #fff3cd;
-  --wemd-mark-color: #333;
+  --ahafair-link-color: #1e6bb8;
+  --ahafair-italic-color: #333;
+  --ahafair-del-color: #999;
+  --ahafair-mark-background: #fff3cd;
+  --ahafair-mark-color: #333;
 
   /* 表格 */
-  --wemd-table-header-background: #f5f5f5;
-  --wemd-table-header-color: #333;
-  --wemd-table-border-color: #ddd;
+  --ahafair-table-header-background: #f5f5f5;
+  --ahafair-table-header-color: #333;
+  --ahafair-table-border-color: #ddd;
 
   /* 分割线 */
-  --wemd-hr-color: #ddd;
-  --wemd-hr-height: 1px;
-  --wemd-hr-margin: 30px;
+  --ahafair-hr-color: #ddd;
+  --ahafair-hr-height: 1px;
+  --ahafair-hr-margin: 30px;
 
   /* 列表 */
-  --wemd-list-spacing: 5px;
-  --wemd-list-marker-color: #1e6bb8;
-  --wemd-list-marker-color-l2: #1e6bb8;
+  --ahafair-list-spacing: 5px;
+  --ahafair-list-marker-color: #1e6bb8;
+  --ahafair-list-marker-color-l2: #1e6bb8;
 
   /* ======================================== */
 
-  padding: 30px var(--wemd-page-padding);
+  padding: 30px var(--ahafair-page-padding);
   max-width: 677px;
   margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
-  color: var(--wemd-text-color);
+  color: var(--ahafair-text-color);
   background-color: transparent;
   /* 透明背景，兼容微信深色模式 */
   word-break: break-word;
@@ -138,19 +138,19 @@
  * 2. 段落样式
  * ============================================
  */
-#wemd p {
-  margin: var(--wemd-paragraph-margin) 0;
+#ahafair p {
+  margin: var(--ahafair-paragraph-margin) 0;
   /* 段落间距：上下各 16px */
-  padding: var(--wemd-paragraph-padding) 0;
-  line-height: var(--wemd-line-height);
+  padding: var(--ahafair-paragraph-padding) 0;
+  line-height: var(--ahafair-line-height);
   /* 行高：1.7 倍，舒适阅读 */
   text-align: justify;
   /* 文本对齐：两端对齐 */
-  color: var(--wemd-text-color);
+  color: var(--ahafair-text-color);
   /* 文字颜色 */
-  font-size: var(--wemd-font-size);
+  font-size: var(--ahafair-font-size);
   /* 字体大小 */
-  letter-spacing: var(--wemd-letter-spacing);
+  letter-spacing: var(--ahafair-letter-spacing);
 }
 
 /* ============================================
@@ -167,73 +167,73 @@
  */
 
 /* 一级标题 */
-#wemd h1 {
-  margin: var(--wemd-h1-margin-top) 0 var(--wemd-h1-margin-bottom);
+#ahafair h1 {
+  margin: var(--ahafair-h1-margin-top) 0 var(--ahafair-h1-margin-bottom);
   /* 外边距：上 40px，下 30px */
   text-align: center;
   /* 居中对齐 */
 }
 
-#wemd h1 .content {
-  font-size: var(--wemd-h1-font-size);
+#ahafair h1 .content {
+  font-size: var(--ahafair-h1-font-size);
   /* 字体大小 */
   font-weight: bold;
   /* 字体粗细：加粗 */
-  color: var(--wemd-h1-color);
+  color: var(--ahafair-h1-color);
   /* 文字颜色 */
 }
 
 /* 隐藏前缀和后缀（如果不需要装饰） */
-#wemd h1 .prefix,
-#wemd h1 .suffix {
+#ahafair h1 .prefix,
+#ahafair h1 .suffix {
   display: none;
 }
 
 /* 二级标题 */
-#wemd h2 {
-  margin: var(--wemd-h2-margin-top) 0 var(--wemd-h2-margin-bottom);
+#ahafair h2 {
+  margin: var(--ahafair-h2-margin-top) 0 var(--ahafair-h2-margin-bottom);
 }
 
-#wemd h2 .content {
-  font-size: var(--wemd-h2-font-size);
+#ahafair h2 .content {
+  font-size: var(--ahafair-h2-font-size);
   font-weight: bold;
-  color: var(--wemd-h2-color);
+  color: var(--ahafair-h2-color);
 }
 
-#wemd h2 .prefix,
-#wemd h2 .suffix {
+#ahafair h2 .prefix,
+#ahafair h2 .suffix {
   display: none;
 }
 
 /* 三级标题 */
-#wemd h3 {
-  margin: var(--wemd-h3-margin-top) 0 var(--wemd-h3-margin-bottom);
+#ahafair h3 {
+  margin: var(--ahafair-h3-margin-top) 0 var(--ahafair-h3-margin-bottom);
 }
 
-#wemd h3 .content {
-  font-size: var(--wemd-h3-font-size);
+#ahafair h3 .content {
+  font-size: var(--ahafair-h3-font-size);
   font-weight: bold;
-  color: var(--wemd-h3-color);
+  color: var(--ahafair-h3-color);
 }
 
-#wemd h3 .prefix,
-#wemd h3 .suffix {
+#ahafair h3 .prefix,
+#ahafair h3 .suffix {
   display: none;
 }
 
 /* 四级标题 */
-#wemd h4 {
-  margin: var(--wemd-h4-margin-top) 0 var(--wemd-h4-margin-bottom);
+#ahafair h4 {
+  margin: var(--ahafair-h4-margin-top) 0 var(--ahafair-h4-margin-bottom);
 }
 
-#wemd h4 .content {
-  font-size: var(--wemd-h4-font-size);
+#ahafair h4 .content {
+  font-size: var(--ahafair-h4-font-size);
   font-weight: bold;
-  color: var(--wemd-h4-color);
+  color: var(--ahafair-h4-color);
 }
 
-#wemd h4 .prefix,
-#wemd h4 .suffix {
+#ahafair h4 .prefix,
+#ahafair h4 .suffix {
   display: none;
 }
 
@@ -242,78 +242,78 @@
  * ============================================
  * 支持多级引用：.multiquote-1, .multiquote-2, .multiquote-3
  */
-#wemd .multiquote-1 {
-  margin: var(--wemd-paragraph-margin) 0;
+#ahafair .multiquote-1 {
+  margin: var(--ahafair-paragraph-margin) 0;
   /* 外边距 */
-  padding: var(--wemd-quote-padding-y) var(--wemd-quote-padding-x);
+  padding: var(--ahafair-quote-padding-y) var(--ahafair-quote-padding-x);
   /* 内边距 */
-  background: var(--wemd-quote-background);
+  background: var(--ahafair-quote-background);
   /* 背景色 */
-  border-left: var(--wemd-quote-border-width) var(--wemd-quote-border-style)
-    var(--wemd-quote-border-color);
+  border-left: var(--ahafair-quote-border-width) var(--ahafair-quote-border-style)
+    var(--ahafair-quote-border-color);
   /* 左边框 */
   border-radius: 4px;
   /* 圆角 */
 }
 
-#wemd .multiquote-1 p {
+#ahafair .multiquote-1 p {
   margin: 0;
   /* 段落无外边距 */
-  color: var(--wemd-quote-text-color);
+  color: var(--ahafair-quote-text-color);
   /* 文字颜色 */
-  font-size: var(--wemd-quote-font-size);
-  line-height: var(--wemd-quote-line-height);
+  font-size: var(--ahafair-quote-font-size);
+  line-height: var(--ahafair-quote-line-height);
 }
 
 /* 二级引用 */
-#wemd .multiquote-2 {
-  margin: var(--wemd-paragraph-margin) 0;
-  padding: var(--wemd-quote-padding-y) var(--wemd-quote-padding-x);
-  background: var(--wemd-quote-background);
-  border-left: var(--wemd-quote-border-width) var(--wemd-quote-border-style)
-    var(--wemd-quote-border-color);
+#ahafair .multiquote-2 {
+  margin: var(--ahafair-paragraph-margin) 0;
+  padding: var(--ahafair-quote-padding-y) var(--ahafair-quote-padding-x);
+  background: var(--ahafair-quote-background);
+  border-left: var(--ahafair-quote-border-width) var(--ahafair-quote-border-style)
+    var(--ahafair-quote-border-color);
 }
 
-#wemd .multiquote-2 p {
+#ahafair .multiquote-2 p {
   margin: 0;
-  color: var(--wemd-quote-text-color);
-  font-size: var(--wemd-quote-font-size);
-  line-height: var(--wemd-quote-line-height);
+  color: var(--ahafair-quote-text-color);
+  font-size: var(--ahafair-quote-font-size);
+  line-height: var(--ahafair-quote-line-height);
 }
 
 /* 三级引用 */
-#wemd .multiquote-3 {
-  margin: var(--wemd-paragraph-margin) 0;
-  padding: var(--wemd-quote-padding-y) var(--wemd-quote-padding-x);
-  background: var(--wemd-quote-background);
-  border-left: var(--wemd-quote-border-width) var(--wemd-quote-border-style)
-    var(--wemd-quote-border-color);
+#ahafair .multiquote-3 {
+  margin: var(--ahafair-paragraph-margin) 0;
+  padding: var(--ahafair-quote-padding-y) var(--ahafair-quote-padding-x);
+  background: var(--ahafair-quote-background);
+  border-left: var(--ahafair-quote-border-width) var(--ahafair-quote-border-style)
+    var(--ahafair-quote-border-color);
 }
 
-#wemd .multiquote-3 p {
+#ahafair .multiquote-3 p {
   margin: 0;
-  color: var(--wemd-quote-text-color);
-  font-size: var(--wemd-quote-font-size);
-  line-height: var(--wemd-quote-line-height);
+  color: var(--ahafair-quote-text-color);
+  font-size: var(--ahafair-quote-font-size);
+  line-height: var(--ahafair-quote-line-height);
 }
 
 /* ============================================
  * 5. 列表样式
  * ============================================
  */
-#wemd ul,
-#wemd ol {
-  margin: var(--wemd-paragraph-margin) 0;
+#ahafair ul,
+#ahafair ol {
+  margin: var(--ahafair-paragraph-margin) 0;
   padding-left: 25px;
   /* 左内边距，为列表符号留空间 */
 }
 
-#wemd ul {
+#ahafair ul {
   list-style-type: disc;
   /* 无序列表：实心圆点 */
 }
 
-#wemd ol {
+#ahafair ol {
   list-style-type: decimal;
   /* 有序列表：数字 */
 }
@@ -321,45 +321,45 @@
 /* 列表项内容
  * 注意：列表项内部使用 <section> 包裹内容
  */
-#wemd li section {
-  margin: var(--wemd-list-spacing) 0;
+#ahafair li section {
+  margin: var(--ahafair-list-spacing) 0;
   /* 列表项间距 */
-  color: var(--wemd-text-color);
+  color: var(--ahafair-text-color);
   /* 文字颜色 */
-  line-height: var(--wemd-line-height);
+  line-height: var(--ahafair-line-height);
 }
 
-#wemd ul ul {
+#ahafair ul ul {
   list-style-type: circle;
   margin-top: 6px;
 }
 
-#wemd ol ol {
+#ahafair ol ol {
   list-style-type: lower-alpha;
 }
 
 /* 列表符号颜色 */
-#wemd ul li::marker,
-#wemd ol li::marker {
-  color: var(--wemd-list-marker-color);
+#ahafair ul li::marker,
+#ahafair ol li::marker {
+  color: var(--ahafair-list-marker-color);
 }
-#wemd ul ul li::marker,
-#wemd ol ol li::marker,
-#wemd ul ol li::marker,
-#wemd ol ul li::marker {
-  color: var(--wemd-list-marker-color-l2);
+#ahafair ul ul li::marker,
+#ahafair ol ol li::marker,
+#ahafair ul ol li::marker,
+#ahafair ol ul li::marker {
+  color: var(--ahafair-list-marker-color-l2);
 }
 
 /* ============================================
  * 6. 链接样式
  * ============================================
  */
-#wemd a {
-  color: var(--wemd-link-color);
+#ahafair a {
+  color: var(--ahafair-link-color);
   /* 链接颜色 */
   text-decoration: none;
   /* 去除下划线 */
-  border-bottom: 1px solid var(--wemd-link-color);
+  border-bottom: 1px solid var(--ahafair-link-color);
   /* 底部边框作为下划线 */
   font-weight: bold;
   /* 加粗 */
@@ -370,43 +370,43 @@
  * ============================================
  */
 /* 加粗 */
-#wemd strong {
+#ahafair strong {
   font-weight: bold;
   color: #000;
 }
 
 /* 斜体 */
-#wemd em {
+#ahafair em {
   font-style: italic;
-  color: var(--wemd-italic-color);
+  color: var(--ahafair-italic-color);
 }
 
 /* 加粗斜体 */
-#wemd em strong {
+#ahafair em strong {
   font-weight: bold;
   font-style: italic;
   color: #000;
 }
 
 /* 高亮 */
-#wemd mark {
-  background: var(--wemd-mark-background);
-  color: var(--wemd-mark-color);
+#ahafair mark {
+  background: var(--ahafair-mark-background);
+  color: var(--ahafair-mark-color);
   padding: 2px 4px;
   border-radius: 3px;
 }
 
 /* 删除线 */
-#wemd del {
+#ahafair del {
   text-decoration: line-through;
-  color: var(--wemd-del-color);
+  color: var(--ahafair-del-color);
 }
 
 /* 下划线 */
-#wemd u {
+#ahafair u {
   text-decoration-line: underline;
-  text-decoration-style: var(--wemd-underline-style);
-  text-decoration-color: var(--wemd-underline-color);
+  text-decoration-style: var(--ahafair-underline-style);
+  text-decoration-color: var(--ahafair-underline-color);
 }
 
 /* ============================================
@@ -414,11 +414,11 @@
  * ============================================
  * 注意：行内代码在段落和列表项中
  */
-#wemd p code,
-#wemd li code {
-  color: var(--wemd-inline-code-color);
+#ahafair p code,
+#ahafair li code {
+  color: var(--ahafair-inline-code-color);
   /* 文字颜色 */
-  background: var(--wemd-inline-code-background);
+  background: var(--ahafair-inline-code-background);
   /* 背景色 */
   padding: 2px 6px;
   /* 内边距 */
@@ -426,7 +426,7 @@
   /* 外边距 */
   border-radius: 3px;
   /* 圆角 */
-  font-size: calc(var(--wemd-font-size) - 2px);
+  font-size: calc(var(--ahafair-font-size) - 2px);
   font-family: "Courier New", Courier, monospace;
   /* 等宽字体 */
 }
@@ -436,31 +436,31 @@
  * ============================================
  * 
  * ⚠️ 重要提示：
- * 1. 必须使用 #wemd pre code.hljs 选择器，不要使用 #wemd pre code
+ * 1. 必须使用 #ahafair pre code.hljs 选择器，不要使用 #ahafair pre code
  * 2. 不要设置全局 color 属性，让语法高亮主题控制文字颜色
  * 3. 如果设置了 color，会覆盖语法高亮的颜色，导致代码看不清
- * 4. 使用 #wemd pre code:not(.hljs) 作为后备样式（无语法高亮时）
+ * 4. 使用 #ahafair pre code:not(.hljs) 作为后备样式（无语法高亮时）
  * 
  * 示例（正确）：
- * #wemd pre code.hljs {
+ * #ahafair pre code.hljs {
  *     background: #f5f5f5;
  *     // 不设置 color
  * }
  * 
  * 示例（错误）：
- * #wemd pre code {
+ * #ahafair pre code {
  *     color: #333;  // ❌ 这会覆盖语法高亮
  * }
  */
-#wemd pre code.hljs {
+#ahafair pre code.hljs {
   display: block;
   padding: 16px;
   /* 内边距 */
-  background: var(--wemd-code-background);
+  background: var(--ahafair-code-background);
   /* 背景色 */
   /* ⚠️ 注意：不要在这里设置 color，让语法高亮主题控制 */
-  font-size: var(--wemd-code-font-size);
-  line-height: var(--wemd-line-height);
+  font-size: var(--ahafair-code-font-size);
+  line-height: var(--ahafair-line-height);
   border-radius: 4px;
   /* 圆角 */
   font-family: "Courier New", "Consolas", "Monaco", monospace;
@@ -470,67 +470,67 @@
   white-space: pre;
   min-width: max-content;
   /* 保留空白和换行 */
-  border: 1px solid var(--wemd-table-border-color);
+  border: 1px solid var(--ahafair-table-border-color);
   /* 边框 */
 }
 
 /* 如果没有语法高亮，设置默认样式 */
-#wemd pre code:not(.hljs) {
-  color: var(--wemd-text-color);
+#ahafair pre code:not(.hljs) {
+  color: var(--ahafair-text-color);
   /* 默认文字颜色 */
-  background: var(--wemd-code-background);
-  border: 1px solid var(--wemd-table-border-color);
+  background: var(--ahafair-code-background);
+  border: 1px solid var(--ahafair-table-border-color);
 }
 
 /* ============================================
  * 10. 图片样式
  * ============================================
  */
-#wemd img {
+#ahafair img {
   display: block;
   /* 块级元素 */
-  margin: var(--wemd-image-margin) auto;
+  margin: var(--ahafair-image-margin) auto;
   /* 居中：上下 20px，左右自动 */
   max-width: 100%;
   /* 最大宽度：不超出容器 */
-  border-radius: var(--wemd-image-border-radius);
+  border-radius: var(--ahafair-image-border-radius);
   /* 圆角 */
 }
 
 /* 图片容器（figure） */
-#wemd figure {
-  margin: var(--wemd-image-margin) 0;
+#ahafair figure {
+  margin: var(--ahafair-image-margin) 0;
   text-align: center;
 }
 
 /* 图片说明文字（figcaption） */
-#wemd figcaption {
+#ahafair figcaption {
   margin-top: 8px;
-  color: var(--wemd-image-caption-color);
-  font-size: var(--wemd-image-caption-font-size);
-  text-align: var(--wemd-image-caption-align);
+  color: var(--ahafair-image-caption-color);
+  font-size: var(--ahafair-image-caption-font-size);
+  text-align: var(--ahafair-image-caption-align);
 }
 
 /* ============================================
  * 11. 表格样式
  * ============================================
  */
-#wemd table {
+#ahafair table {
   width: 100%;
   /* 宽度：100% */
   border-collapse: collapse;
   /* 边框合并 */
-  margin: var(--wemd-paragraph-margin) 0;
+  margin: var(--ahafair-paragraph-margin) 0;
   /* 外边距 */
   font-size: 14px;
 }
 
 /* 表头 */
-#wemd table tr th {
-  background: var(--wemd-table-header-background);
+#ahafair table tr th {
+  background: var(--ahafair-table-header-background);
   /* 背景色 */
-  color: var(--wemd-table-header-color);
-  border: 1px solid var(--wemd-table-border-color);
+  color: var(--ahafair-table-header-color);
+  border: 1px solid var(--ahafair-table-border-color);
   /* 边框 */
   padding: 10px;
   /* 内边距 */
@@ -540,14 +540,14 @@
 }
 
 /* 表格单元格 */
-#wemd table tr td {
-  border: 1px solid var(--wemd-table-border-color);
+#ahafair table tr td {
+  border: 1px solid var(--ahafair-table-border-color);
   padding: 10px;
-  color: var(--wemd-text-color);
+  color: var(--ahafair-text-color);
 }
 
 /* 斑马纹（隔行变色） */
-#wemd table tr:nth-child(even) td {
+#ahafair table tr:nth-child(even) td {
   background-color: #fafafa;
 }
 
@@ -555,41 +555,41 @@
  * 12. 分割线样式
  * ============================================
  */
-#wemd hr {
-  margin: var(--wemd-hr-margin) 0;
+#ahafair hr {
+  margin: var(--ahafair-hr-margin) 0;
   /* 外边距 */
   border: none;
   /* 去除默认边框 */
-  border-top: var(--wemd-hr-height) solid var(--wemd-hr-color);
+  border-top: var(--ahafair-hr-height) solid var(--ahafair-hr-color);
   /* 顶部边框 */
-  height: var(--wemd-hr-height);
+  height: var(--ahafair-hr-height);
 }
 
 /* ============================================
  * 13. 脚注样式
  * ============================================
  */
-#wemd .footnote-word,
-#wemd .footnote-ref {
+#ahafair .footnote-word,
+#ahafair .footnote-ref {
   color: #1e6bb8;
   /* 脚注链接颜色 */
   font-weight: bold;
 }
 
-#wemd .footnotes-sep {
+#ahafair .footnotes-sep {
   border-top: 1px solid #ddd;
   /* 分隔线 */
   padding-top: 20px;
   margin-top: 40px;
 }
 
-#wemd .footnote-num {
+#ahafair .footnote-num {
   font-weight: bold;
   color: #1e6bb8;
   margin-right: 4px;
 }
 
-#wemd .footnote-item p {
+#ahafair .footnote-item p {
   color: #666;
   font-size: 14px;
   margin: 4px 0;
@@ -600,24 +600,24 @@
  * ============================================
  */
 /* 行间公式 */
-#wemd .block-equation {
+#ahafair .block-equation {
   display: block;
   text-align: center;
   margin: 20px 0;
   overflow-x: auto;
 }
 
-#wemd .block-equation svg {
+#ahafair .block-equation svg {
   max-width: 100% !important;
   /* 最大宽度：不超出容器 */
 }
 
 /* 行内公式 */
-#wemd .inline-equation {
+#ahafair .inline-equation {
   display: inline;
 }
 
-#wemd .inline-equation svg {
+#ahafair .inline-equation svg {
   max-width: 100%;
   vertical-align: middle;
   /* 垂直居中 */
@@ -632,7 +632,7 @@
  */
 
 /* 提示块基础样式 */
-#wemd .callout {
+#ahafair .callout {
   margin: 20px 0;
   padding: 16px 20px;
   background: #f5f5f5;
@@ -640,39 +640,39 @@
   border-radius: 4px;
 }
 
-#wemd .callout-title {
+#ahafair .callout-title {
   font-weight: bold;
   margin-bottom: 8px;
   color: #333;
   font-size: 15px;
 }
 
-#wemd .callout-icon {
+#ahafair .callout-icon {
   margin-right: 6px;
 }
 
 /* 不同类型的提示块 */
-#wemd .callout-note {
+#ahafair .callout-note {
   border-left-color: #6366f1;
   background: #f5f5ff;
 }
 
-#wemd .callout-tip {
+#ahafair .callout-tip {
   border-left-color: #10b981;
   background: #ecfdf5;
 }
 
-#wemd .callout-important {
+#ahafair .callout-important {
   border-left-color: #8b5cf6;
   background: #f5f3ff;
 }
 
-#wemd .callout-warning {
+#ahafair .callout-warning {
   border-left-color: #f59e0b;
   background: #fffbeb;
 }
 
-#wemd .callout-caution {
+#ahafair .callout-caution {
   border-left-color: #ef4444;
   background: #fff5f5;
 }
@@ -682,22 +682,22 @@
  * ============================================
  */
 /* 定义列表 */
-#wemd dl {
+#ahafair dl {
   margin: 15px 0;
 }
 
-#wemd dt {
+#ahafair dt {
   font-weight: bold;
   margin-top: 10px;
 }
 
-#wemd dd {
+#ahafair dd {
   margin-left: 20px;
   color: #666;
 }
 
 /* 目录（TOC） */
-#wemd .table-of-contents {
+#ahafair .table-of-contents {
   margin: 20px 0;
   padding: 15px;
   background: #f5f5f5;
@@ -705,7 +705,7 @@
   border-radius: 4px;
 }
 
-#wemd .table-of-contents a {
+#ahafair .table-of-contents a {
   color: #333;
   text-decoration: none;
 }
@@ -715,7 +715,7 @@
  * ============================================
  */
 
-#wemd .imageflow-layer1 {
+#ahafair .imageflow-layer1 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   /* white-space: normal; */
@@ -724,13 +724,13 @@
   overflow: hidden;
 }
 
-#wemd .imageflow-layer2 {
+#ahafair .imageflow-layer2 {
   white-space: nowrap;
   width: 100%;
   overflow-x: scroll;
 }
 
-#wemd .imageflow-layer3 {
+#ahafair .imageflow-layer3 {
   display: inline-block;
   word-wrap: break-word;
   white-space: normal;
@@ -740,7 +740,7 @@
   flex-shrink: 0;
 }
 
-#wemd .imageflow-img {
+#ahafair .imageflow-img {
   display: block;
   width: 100%;
   height: auto;
@@ -749,7 +749,7 @@
   border-radius: 4px;
 }
 
-#wemd .imageflow-caption {
+#ahafair .imageflow-caption {
   text-align: center;
   margin-top: 0px;
   padding-top: 0px;

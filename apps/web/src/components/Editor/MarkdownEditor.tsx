@@ -24,7 +24,7 @@ import {
 } from "../../services/image/autoCompressImage";
 import { uploadEditorImage } from "../../services/image/imageUploadFlow";
 
-const SYNC_SCROLL_EVENT = "wemd-sync-scroll";
+const SYNC_SCROLL_EVENT = "ahafair-sync-scroll";
 
 interface SyncScrollDetail {
   source: "editor" | "preview";
@@ -93,7 +93,7 @@ export function MarkdownEditor() {
                   return result;
                 })();
 
-                const loadingToken = `wemd-upload-${Date.now()}-${Math.random()
+                const loadingToken = `ahafair-upload-${Date.now()}-${Math.random()
                   .toString(36)
                   .slice(2, 8)}`;
                 const loadingText = `![上传中... ${file.name}](${loadingToken})`;

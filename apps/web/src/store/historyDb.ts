@@ -12,7 +12,7 @@ interface HistoryDB extends DBSchema {
   };
 }
 
-const DB_NAME = 'wemd-history';
+const DB_NAME = 'ahafair-history';
 const DB_VERSION = 2;
 const HISTORY_LIMIT = 30;
 

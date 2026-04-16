@@ -3,7 +3,7 @@ import type { StorageAdapterContext, StorageInitResult, StorageType } from './ty
 
 type AdapterFactory = () => Promise<StorageAdapter>;
 
-const STORAGE_KEY = 'wemd-storage-adapter';
+const STORAGE_KEY = 'ahafair-storage-adapter';
 const uniqueId = () => {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();

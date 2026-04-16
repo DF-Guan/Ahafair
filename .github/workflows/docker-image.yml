@@ -36,7 +36,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/tenngoxars/wemd-web
+  IMAGE_NAME: ghcr.io/tenngoxars/ahafair-web
 
 jobs:
   build-and-push:

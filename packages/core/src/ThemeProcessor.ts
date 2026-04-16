@@ -1,7 +1,7 @@
 import juice from "juice";
 
-const DATA_TOOL = "WeMD编辑器";
-const SECTION_ID = "wemd";
+const DATA_TOOL = "Ahafair编辑器";
+const SECTION_ID = "ahafair";
 
 const BLOCK_TAGS = [
   "p",

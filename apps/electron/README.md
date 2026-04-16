@@ -1,6 +1,6 @@
-# WeMD Electron App
+# Ahafair Electron App
 
-基于 Electron 的 WeMD 桌面应用，完全复用 Web 端代码。
+基于 Electron 的 Ahafair 桌面应用，完全复用 Web 端代码。
 
 ## 开发
 

@@ -31,20 +31,19 @@
   overflow: hidden;
   height: 100%;
   min-height: 0;
-  border-radius: var(--radius-xl);
-  background: transparent;
+  border-radius: var(--ui-radius-xl);
 }
 
 .history-pane__content {
   height: 100%;
   min-height: 0;
-  border-radius: var(--radius-xl);
+  border-radius: var(--ui-radius-xl);
   overflow: hidden;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--border-width) solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--ui-shadow-lg);
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease,
@@ -84,23 +83,26 @@
 .preview-pane {
   height: 100%;
   min-height: 0;
-  border-radius: var(--radius-xl);
+  border-radius: var(--ui-radius-xl);
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--border-width) solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--ui-shadow-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.3s ease;
 }
 
 .editor-pane:hover,
 .preview-pane:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-premium);
-  border-color: color-mix(in srgb, var(--border-color) 60%, transparent);
+  transform: translateY(-6px);
+  box-shadow: var(--ui-shadow-premium);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 1440px) {
@@ -152,7 +154,7 @@
 
   .app[data-layout-mode="mobile"] .editor-pane,
   .app[data-layout-mode="mobile"] .preview-pane {
-    border-radius: var(--radius-lg);
+    border-radius: var(--ui-radius-lg);
     min-height: 0;
     height: 100%;
   }
@@ -183,10 +185,11 @@
   .app[data-layout-mode="mobile"] .editor-pane:hover,
   .app[data-layout-mode="mobile"] .preview-pane:hover {
     transform: none;
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--ui-shadow-lg);
   }
 }
 
+/* Apple风格侧边栏切换按钮 */
 .history-toggle {
   position: fixed;
   left: 16px;
@@ -196,24 +199,24 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--ui-radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--border-width) solid
-    color-mix(in srgb, var(--accent-primary) 60%, transparent);
-  background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   color: var(--text-primary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--ui-shadow-md);
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   transition:
-    transform 0.2s ease,
+    transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
     box-shadow 0.2s ease,
     background 0.2s ease,
     border-color 0.2s ease;
-  backdrop-filter: blur(10px);
 }
 
 .history-toggle::before {
@@ -227,17 +230,16 @@
 
 .history-toggle:hover {
   transform: translateY(-50%) translateX(2px);
-  box-shadow: var(--shadow-lg);
-  background: var(--bg-primary);
-  border-color: var(--accent-primary);
+  box-shadow: var(--ui-shadow-lg);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .history-toggle.is-collapsed {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-  border-color: color-mix(in srgb, var(--text-primary) 35%, transparent);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-secondary);
+  border-color: rgba(0, 0, 0, 0.08);
   transform: translateY(-50%) translateX(-1px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--ui-shadow-lg);
 }
 
 .history-toggle.is-collapsed::before {

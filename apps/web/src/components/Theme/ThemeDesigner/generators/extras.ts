@@ -12,27 +12,27 @@ export function generateExtras(
   return `${presets.headingExtras}
 ${presets.quoteExtras}
 
-#wemd .footnote-word {
+#ahafair .footnote-word {
   color: ${v.footnoteHeaderColor || v.primaryColor};
   font-weight: bold;
 }
 
-#wemd .footnote-ref {
+#ahafair .footnote-ref {
   color: ${v.footnoteHeaderColor || v.primaryColor};
   font-weight: bold;
 }
 
-#wemd .footnote-ref a {
+#ahafair .footnote-ref a {
   color: ${v.footnoteHeaderColor || v.primaryColor} !important;
   text-decoration: none;
   border-bottom: none!important;
 }
 
-#wemd .footnote-item {
+#ahafair .footnote-item {
   display: flex;
 }
 
-#wemd .footnote-num {
+#ahafair .footnote-num {
   display: inline;
   width: 32px;
   flex-shrink: 0;
@@ -43,14 +43,14 @@ ${presets.quoteExtras}
   font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#wemd .footnote-num a,
-  #wemd .footnote-item a.footnote-backref {
+#ahafair .footnote-num a,
+  #ahafair .footnote-item a.footnote-backref {
   color: ${v.footnoteHeaderColor || v.primaryColor} !important;
   text-decoration: none;
   border-bottom: none!important;
 }
 
-#wemd .footnote-item p {
+#ahafair .footnote-item p {
   display: inline;
   font-size: ${v.footnoteFontSize}px;
   flex: 1;
@@ -61,7 +61,7 @@ ${presets.quoteExtras}
   color: ${v.footnoteColor || "#666"};
 }
 
-#wemd .footnotes-sep:before {
+#ahafair .footnotes-sep:before {
   content: "${v.footnoteHeader}";
   display: ${v.footnoteHeader ? "block" : "none"};
   ${
@@ -123,16 +123,16 @@ ${presets.quoteExtras}
   }
 }
 
-#wemd .callout {
+#ahafair .callout {
   border-left-width: 4px;
   border-left-style: solid;
   border-radius: 4px;
-  margin: var(--wemd-paragraph-margin) 0;
+  margin: var(--ahafair-paragraph-margin) 0;
   padding: 12px 16px;
 }
 
 /* 横向滑动图片 */
-#wemd .imageflow-layer1 {
+#ahafair .imageflow-layer1 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   white-space: normal;
@@ -141,13 +141,13 @@ ${presets.quoteExtras}
   overflow: hidden;
 }
 
-#wemd .imageflow-layer2 {
+#ahafair .imageflow-layer2 {
   white-space: nowrap;
   width: 100%;
   overflow-x: scroll;
 }
 
-#wemd .imageflow-layer3 {
+#ahafair .imageflow-layer3 {
   display: inline-block;
   word-wrap: break-word;
   white-space: normal;
@@ -157,25 +157,25 @@ ${presets.quoteExtras}
   flex-shrink: 0;
 }
 
-#wemd .imageflow-img {
+#ahafair .imageflow-img {
   display: block;
   width: 100%;
   height: auto;
   max-height: 300px;
   object-fit: contain;
-  border-radius: var(--wemd-image-border-radius);
+  border-radius: var(--ahafair-image-border-radius);
 }
 
-#wemd .imageflow-caption {
+#ahafair .imageflow-caption {
   text-align: center;
   margin-top: 0px;
   padding-top: 0px;
-  color: var(--wemd-image-caption-color);
-  font-size: var(--wemd-image-caption-font-size);
+  color: var(--ahafair-image-caption-color);
+  font-size: var(--ahafair-image-caption-font-size);
 }
 
 /* 提示块默认样式 */
-#wemd .callout-title {
+#ahafair .callout-title {
   font-weight: 600;
   margin-bottom: 8px;
   display: flex;
@@ -184,27 +184,27 @@ ${presets.quoteExtras}
   letter-spacing: 0.05em;
 }
 
-#wemd .callout-icon {
+#ahafair .callout-icon {
   font-size: 18px;
   margin-right: 8px;
 }
 
-#wemd .callout p {
+#ahafair .callout p {
   margin: 0 !important;
 }
 
-#wemd .callout-note { border-left: 4px solid #6366f1; background: #f5f5ff; }
-#wemd .callout-tip { border-left: 4px solid #10b981; background: #ecfdf5; }
-#wemd .callout-important { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
-#wemd .callout-warning { border-left: 4px solid #f59e0b; background: #fffbeb; }
-#wemd .callout-caution { border-left: 4px solid #ef4444; background: #fff5f5; }
+#ahafair .callout-note { border-left: 4px solid #6366f1; background: #f5f5ff; }
+#ahafair .callout-tip { border-left: 4px solid #10b981; background: #ecfdf5; }
+#ahafair .callout-important { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
+#ahafair .callout-warning { border-left: 4px solid #f59e0b; background: #fffbeb; }
+#ahafair .callout-caution { border-left: 4px solid #ef4444; background: #fff5f5; }
 
 /* Mermaid 样式覆盖 */
-#wemd .mermaid .node foreignObject {
+#ahafair .mermaid .node foreignObject {
   overflow: visible;
 }
-#wemd .mermaid .label {
-  color: var(--wemd-text-color);
+#ahafair .mermaid .label {
+  color: var(--ahafair-text-color);
   font-family: inherit;
   display: flex;
   align-items: center;
@@ -214,7 +214,7 @@ ${presets.quoteExtras}
   text-align: center;
   line-height: 1.2;
 }
-#wemd .mermaid .label * {
+#ahafair .mermaid .label * {
   margin: 0;
   padding: 0;
 }

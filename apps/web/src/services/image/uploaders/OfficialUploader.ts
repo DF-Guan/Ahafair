@@ -13,7 +13,7 @@ export class OfficialUploader implements ImageUploader {
 
     constructor(config?: OfficialConfig) {
         // 默认使用 Cloudflare Worker API
-        this.serverUrl = config?.serverUrl || 'https://api.wemd.app';
+        this.serverUrl = config?.serverUrl || 'https://api.ahafair.app';
     }
 
     configure(config: OfficialConfig) {

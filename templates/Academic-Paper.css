@@ -1,4 +1,4 @@
-#wemd {
+#ahafair {
     padding: 30px 20px;
     max-width: 677px;
     margin: 0 auto;
@@ -11,7 +11,7 @@
 }
 
 /* 正文 - 移除首行缩进，改用段间距适应移动端 */
-#wemd p {
+#ahafair p {
     margin: 16px 0;
     line-height: 1.7;
     text-align: justify;
@@ -21,25 +21,25 @@
 }
 
 /* 一级标题 - 居中论文题 */
-#wemd h1 {
+#ahafair h1 {
     margin: 40px 0 30px;
     text-align: center;
     line-height: 1.4;
 }
 
-#wemd h1 .content {
+#ahafair h1 .content {
     font-size: 22px;
     font-weight: bold;
     color: #000;
 }
 
-#wemd h1 .prefix,
-#wemd h1 .suffix {
+#ahafair h1 .prefix,
+#ahafair h1 .suffix {
     display: none;
 }
 
 /* 二级标题 - 章节 Section */
-#wemd h2 {
+#ahafair h2 {
     margin: 30px 0 15px;
     text-align: left;
     border-bottom: 2px solid #000;
@@ -47,40 +47,40 @@
     padding-bottom: 8px;
 }
 
-#wemd h2 .content {
+#ahafair h2 .content {
     font-size: 18px;
     font-weight: bold;
     color: #000;
 }
 
-#wemd h2 .prefix,
-#wemd h2 .suffix {
+#ahafair h2 .prefix,
+#ahafair h2 .suffix {
     display: none;
 }
 
 /* 三级标题 - Subsection */
-#wemd h3 {
+#ahafair h3 {
     margin: 20px 0 10px;
 }
 
-#wemd h3 .content {
+#ahafair h3 .content {
     font-size: 16px;
     font-weight: bold;
     color: #800000;
     /* 栗色，区分层级 */
 }
 
-#wemd h3 .prefix,
-#wemd h3 .suffix {
+#ahafair h3 .prefix,
+#ahafair h3 .suffix {
     display: none;
 }
 
 /* 四级标题 */
-#wemd h4 {
+#ahafair h4 {
     margin: 15px 0 5px;
 }
 
-#wemd h4 .content {
+#ahafair h4 .content {
     font-size: 16px;
     font-weight: bold;
     font-style: italic;
@@ -88,13 +88,13 @@
     color: #333;
 }
 
-#wemd h4 .prefix,
-#wemd h4 .suffix {
+#ahafair h4 .prefix,
+#ahafair h4 .suffix {
     display: none;
 }
 
 /* 引用 - 简洁边框 */
-#wemd .multiquote-1 {
+#ahafair .multiquote-1 {
     margin: 20px 0;
     padding: 16px 20px;
     background: #fafafa;
@@ -102,7 +102,7 @@
     border-left: 4px solid #666;
 }
 
-#wemd .multiquote-1 p {
+#ahafair .multiquote-1 p {
     color: #555;
     font-size: 15px;
     margin: 0;
@@ -110,107 +110,107 @@
     text-indent: 0;
 }
 
-#wemd .multiquote-2 {
+#ahafair .multiquote-2 {
     margin: 18px 0 18px 20px;
     padding: 14px 18px;
     background: #fafafa;
     border: 1px solid #ddd;
 }
 
-#wemd .multiquote-2 p {
+#ahafair .multiquote-2 p {
     color: #555;
     font-size: 15px;
     margin: 0;
 }
 
-#wemd .multiquote-3 {
+#ahafair .multiquote-3 {
     margin: 16px 0 16px 20px;
     padding: 12px 16px;
     background: #fcfcfc;
     border: 1px solid #e0e0e0;
 }
 
-#wemd .multiquote-3 p {
+#ahafair .multiquote-3 p {
     color: #555;
     font-size: 15px;
     margin: 0;
 }
 
 /* 列表 */
-#wemd ul {
+#ahafair ul {
     list-style: disc;
     padding-left: 20px;
     margin: 16px 0;
 }
 
-#wemd ul ul {
+#ahafair ul ul {
     list-style-type: square;
     margin-top: 5px;
 }
 
-#wemd ol {
+#ahafair ol {
     list-style: decimal;
     padding-left: 20px;
     margin: 16px 0;
 }
 
-#wemd ol ol {
+#ahafair ol ol {
     list-style-type: lower-alpha;
 }
 
-#wemd li section {
+#ahafair li section {
     color: #333;
     line-height: 1.6;
 }
 
 /* 链接 - 经典深蓝 */
-#wemd a {
+#ahafair a {
     color: #000080;
     text-decoration: underline;
 }
 
 /* 加粗 */
-#wemd strong {
+#ahafair strong {
     color: #000;
     font-weight: bold;
 }
 
 /* 斜体 */
-#wemd em {
+#ahafair em {
     font-style: italic;
     color: #000;
 }
 
 /* 加粗斜体 */
-#wemd em strong {
+#ahafair em strong {
     font-weight: bold;
     font-style: italic;
     color: #000;
 }
 
 /* 高亮 - 学术标记风格 */
-#wemd mark {
+#ahafair mark {
     background: #fff3cd;
     color: #000;
     padding: 0 2px;
 }
 
 /* 删除线 */
-#wemd del {
+#ahafair del {
     text-decoration: line-through;
     color: #666;
     opacity: 0.7;
 }
 
 /* 图片 - 简洁无装饰 */
-#wemd img {
+#ahafair img {
     display: block;
     margin: 30px auto;
     width: 100%;
     border: 1px solid #ddd;
 }
 
-#wemd figcaption {
+#ahafair figcaption {
     margin-top: 8px;
     text-align: center;
     color: #666;
@@ -222,8 +222,8 @@
  * 行内代码 - LaTeX \texttt 风格 (修复重点)
  * 纯黑文字 + 极淡灰底 + 等宽字体
  */
-#wemd p code,
-#wemd li code {
+#ahafair p code,
+#ahafair li code {
     color: #000;
     /* 纯黑 */
     background: #f4f4f4;
@@ -240,7 +240,7 @@
 
 /* 代码块 - 简单的学术风格 */
 /* 注意：不要设置 color，让语法高亮主题控制文字颜色 */
-#wemd pre code.hljs {
+#ahafair pre code.hljs {
     background: #f9f9f9;
     border: 1px solid #ccc;
     /* color 由 .hljs 语法高亮主题控制 */
@@ -255,12 +255,12 @@
 }
 
 /* 如果没有语法高亮，设置默认颜色 */
-#wemd pre code:not(.hljs) {
+#ahafair pre code:not(.hljs) {
     color: #333;
 }
 
 /* 表格 - 经典三线表 */
-#wemd table {
+#ahafair table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
@@ -269,7 +269,7 @@
     border-bottom: 2px solid #000;
 }
 
-#wemd table tr th {
+#ahafair table tr th {
     border-bottom: 1px solid #000;
     padding: 10px 5px;
     font-weight: bold;
@@ -277,7 +277,7 @@
     background: #fff;
 }
 
-#wemd table tr td {
+#ahafair table tr td {
     padding: 10px 5px;
     border: none;
     text-align: center;
@@ -285,17 +285,17 @@
 }
 
 /* 隔行微底色 */
-#wemd table tr:nth-child(even) td {
+#ahafair table tr:nth-child(even) td {
     background-color: #fafafa;
 }
 
 /* 脚注 */
-#wemd .footnote-word,
-#wemd .footnote-ref {
+#ahafair .footnote-word,
+#ahafair .footnote-ref {
     color: #000080;
 }
 
-#wemd .footnotes-sep {
+#ahafair .footnotes-sep {
     border-top: 1px solid #ccc;
     padding-top: 10px;
     margin-top: 40px;
@@ -303,7 +303,7 @@
     /* 短线 */
 }
 
-#wemd .footnote-num {
+#ahafair .footnote-num {
     font-weight: bold;
     color: #000;
     margin-right: 4px;
@@ -311,24 +311,24 @@
     font-size: 10px;
 }
 
-#wemd .footnote-item p {
+#ahafair .footnote-item p {
     color: #666;
     font-size: 12px;
     margin: 4px 0;
 }
 
 /* 公式 */
-#wemd .block-equation svg {
+#ahafair .block-equation svg {
     max-width: 100% !important;
 }
 
-#wemd .inline-equation svg {
+#ahafair .inline-equation svg {
     max-width: 100%;
     vertical-align: middle;
 }
 
 /* 提示块 - 学术风格 */
-#wemd .callout {
+#ahafair .callout {
     margin: 20px 0;
     padding: 16px 20px;
     border: 1px solid #ddd;
@@ -336,7 +336,7 @@
     background: #fafafa;
 }
 
-#wemd .callout-title {
+#ahafair .callout-title {
     font-weight: bold;
     margin-bottom: 8px;
     font-size: 14px;
@@ -344,35 +344,35 @@
     color: #000;
 }
 
-#wemd .callout-icon {
+#ahafair .callout-icon {
     margin-right: 6px;
 }
 
-#wemd .callout-note {
+#ahafair .callout-note {
     border-left: 4px solid #666;
     background: #f5f5f5;
 }
 
-#wemd .callout-tip {
+#ahafair .callout-tip {
     border-left: 4px solid #555;
     background: #f5f5f5;
 }
 
-#wemd .callout-important {
+#ahafair .callout-important {
     border-left: 4px solid #888;
     background: #f5f5f5;
 }
 
-#wemd .callout-warning {
+#ahafair .callout-warning {
     border-left: 4px solid #999;
     background: #f5f5f5;
 }
 
-#wemd .callout-caution {
+#ahafair .callout-caution {
     border-left: 4px solid #000;
     background: #f5f5f5;
 }/* Imageflow CSS */
-#wemd .imageflow-layer1 {
+#ahafair .imageflow-layer1 {
     margin-top: 1em;
     margin-bottom: 0.5em;
     /* white-space: normal; */
@@ -381,13 +381,13 @@
     overflow: hidden;
 }
 
-#wemd .imageflow-layer2 {
+#ahafair .imageflow-layer2 {
     white-space: nowrap;
     width: 100%;
     overflow-x: scroll;
 }
 
-#wemd .imageflow-layer3 {
+#ahafair .imageflow-layer3 {
     display: inline-block;
     word-wrap: break-word;
     white-space: normal;
@@ -397,7 +397,7 @@
     flex-shrink: 0;
 }
 
-#wemd .imageflow-img {
+#ahafair .imageflow-img {
     display: block;
     width: 100%;
     height: auto;
@@ -406,7 +406,7 @@
     border-radius: 4px;
 }
 
-#wemd .imageflow-caption {
+#ahafair .imageflow-caption {
     text-align: center;
     margin-top: 0px;
     padding-top: 0px;

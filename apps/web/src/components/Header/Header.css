@@ -128,9 +128,9 @@
 }
 
 .floating-btn-primary:hover {
-  background: var(--accent-gradient) !important;
+  background: var(--ui-accent-primary) !important;
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(7, 193, 96, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   color: white !important;
 }
 
@@ -408,19 +408,19 @@
   /* 增加间距 */
 }
 
-/* 主按钮 - 更加精致 */
+/* 主按钮 - Apple黑色风格 */
 .btn-primary {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px 24px;
-  background: var(--accent-gradient) !important;
+  background: var(--ui-accent-primary) !important;
   color: #ffffff !important;
   border: none;
   border-radius: var(--radius-pill);
   font-size: 14px;
   font-weight: 600;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   letter-spacing: 0.3px;
@@ -428,12 +428,12 @@
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .btn-primary:active {
   transform: translateY(1px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary svg {
@@ -441,26 +441,28 @@
   height: 18px;
 }
 
-/* 次要按钮 - 幽灵按钮风格 */
+/* 次要按钮 - Apple亚光风格 */
 .btn-secondary {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: transparent;
-  color: var(--text-secondary);
-  border: var(--border-width) solid var(--border-light);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: var(--radius-pill);
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .btn-secondary:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border-color: var(--border-color);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
 }
 
 .btn-secondary svg {
@@ -503,7 +505,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -514,14 +518,14 @@
 /* CSS 编辑器模态框 */
 .css-editor-modal {
   background: var(--bg-primary);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
+  border-radius: var(--ui-radius-xl);
+  box-shadow: var(--ui-shadow-xl), 0 0 0 0.5px rgba(0,0,0,0.05);
   width: 90%;
   max-width: 900px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  animation: slideInRight 0.3s ease;
+  animation: slideInRight 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .css-editor-header {

@@ -1,5 +1,5 @@
 export const morandiForestTheme = `/* 莫兰迪森林风格 */
-#wemd {
+#ahafair {
   padding: 5px 22px;
   max-width: 677px;
   margin: 0 auto;
@@ -11,7 +11,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 段落 */
-#wemd p {
+#ahafair p {
   margin-top: 26px;
   margin-bottom: 26px;
   line-height: 2.0;
@@ -22,13 +22,13 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 一级标题 */
-#wemd h1 {
+#ahafair h1 {
   margin-top: 60px;
   margin-bottom: 50px;
   text-align: center;
 }
 
-#wemd h1 .content {
+#ahafair h1 .content {
   display: inline-block;
   font-size: 24px;
   font-weight: normal;
@@ -40,13 +40,13 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   letter-spacing: 2px;
 }
 
-#wemd h1 .prefix,
-#wemd h1 .suffix {
+#ahafair h1 .prefix,
+#ahafair h1 .suffix {
   display: none;
 }
 
 /* 二级标题 */
-#wemd h2 {
+#ahafair h2 {
   margin-top: 50px;
   margin-bottom: 24px;
   text-align: left;
@@ -54,7 +54,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   padding-bottom: 10px;
 }
 
-#wemd h2 .content {
+#ahafair h2 .content {
   display: inline-block;
   font-size: 19px;
   font-weight: 700;
@@ -65,19 +65,19 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   letter-spacing: 1px;
 }
 
-#wemd h2 .prefix,
-#wemd h2 .suffix {
+#ahafair h2 .prefix,
+#ahafair h2 .suffix {
   display: none;
 }
 
 /* 三级标题 */
-#wemd h3 {
+#ahafair h3 {
   margin-top: 40px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-#wemd h3 .content {
+#ahafair h3 .content {
   font-size: 17px;
   font-weight: bold;
   color: #739072;
@@ -86,19 +86,19 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   padding-bottom: 4px;
 }
 
-#wemd h3 .prefix,
-#wemd h3 .suffix {
+#ahafair h3 .prefix,
+#ahafair h3 .suffix {
   display: none;
 }
 
 /* 四级标题 */
-#wemd h4 {
+#ahafair h4 {
   margin-top: 30px;
   margin-bottom: 15px;
   text-align: left;
 }
 
-#wemd h4 .content {
+#ahafair h4 .content {
   display: inline-block;
   font-size: 15px;
   font-weight: 700;
@@ -109,31 +109,31 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   line-height: 1.4;
 }
 
-#wemd h4 .prefix,
-#wemd h4 .suffix {
+#ahafair h4 .prefix,
+#ahafair h4 .suffix {
   display: none;
 }
 
 /* 列表 */
-#wemd ul {
+#ahafair ul {
   list-style-type: disc;
   padding-left: 20px;
   margin: 20px 0;
   color: #86A789;
 }
 
-#wemd ul li {
+#ahafair ul li {
   margin-bottom: 12px;
   line-height: 1.8;
 }
 
-#wemd li section {
+#ahafair li section {
   color: #3A4D39;
   font-size: 16px;
 }
 
 /* 有序列表 */
-#wemd ol {
+#ahafair ol {
   list-style-type: decimal;
   padding-left: 20px;
   margin: 20px 0;
@@ -141,32 +141,32 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   font-weight: bold;
 }
 
-#wemd ul ul {
+#ahafair ul ul {
   list-style-type: circle;
   color: #4F6F52;
   margin-top: 8px;
 }
 
-#wemd ol ol {
+#ahafair ol ol {
   list-style-type: lower-alpha;
   color: #739072;
 }
 
-#wemd ol li {
+#ahafair ol li {
   margin-bottom: 12px;
   line-height: 1.8;
 }
 
-#wemd ol li section {
+#ahafair ol li section {
   color: #3A4D39;
   font-weight: normal;
   font-size: 16px;
 }
 
 /* 引用 */
-#wemd .multiquote-1,
-#wemd .multiquote-2,
-#wemd .multiquote-3 {
+#ahafair .multiquote-1,
+#ahafair .multiquote-2,
+#ahafair .multiquote-3 {
   margin: 36px 0;
   padding: 24px;
   background-color: #F6F8F6;
@@ -175,9 +175,9 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   overflow: visible !important;
 }
 
-#wemd .multiquote-1 p,
-#wemd .multiquote-2 p,
-#wemd .multiquote-3 p {
+#ahafair .multiquote-1 p,
+#ahafair .multiquote-2 p,
+#ahafair .multiquote-3 p {
   margin: 0;
   color: #556B58;
   font-size: 15px;
@@ -186,7 +186,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 链接 */
-#wemd a {
+#ahafair a {
   color: #4F6F52;
   text-decoration: none;
   border-bottom: 1px solid #4F6F52;
@@ -195,7 +195,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 加粗 */
-#wemd strong {
+#ahafair strong {
   color: #1A261D;
   font-weight: 700;
   background: linear-gradient(to top, rgba(134, 167, 137, 0.4) 50%, transparent 50%);
@@ -204,24 +204,24 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 斜体 */
-#wemd em {
+#ahafair em {
   color: #739072;
   font-style: italic;
 }
 
-#wemd em strong {
+#ahafair em strong {
   color: #4F6F52;
 }
 
 /* 高亮 - 浅绿背景 */
-#wemd mark {
+#ahafair mark {
   background: linear-gradient(to top, rgba(134, 167, 137, 0.3) 50%, transparent 50%);
   color: #1A261D;
   padding: 0 2px;
 }
 
 /* 删除线 */
-#wemd del {
+#ahafair del {
   text-decoration: line-through;
   color: #889E8B;
 }
@@ -230,7 +230,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
  * 分隔线 
  * 修复了这里无效的颜色代码 #D2DSD4
  */
-#wemd hr {
+#ahafair hr {
   margin: 60px auto;
   border: 0;
   height: 1px;
@@ -240,7 +240,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 图片 */
-#wemd img {
+#ahafair img {
   display: block;
   margin: 40px auto;
   width: 100%;
@@ -251,7 +251,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   border: 1px solid #eee;
 }
 
-#wemd figcaption {
+#ahafair figcaption {
   font-size: 13px;
   color: #889E8B;
   margin-top: 10px;
@@ -259,8 +259,8 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 行内代码 */
-#wemd p code,
-#wemd li code {
+#ahafair p code,
+#ahafair li code {
   color: #4F6F52;
   background: #EDF1EE;
   border: none;
@@ -273,7 +273,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 
 /* 代码块 */
 /* 代码块 - 注意：不要设置 color，让语法高亮主题控制文字颜色 */
-#wemd pre code.hljs {
+#ahafair pre code.hljs {
   display: block;
   padding: 20px;
   background: #F0F2F0;
@@ -289,7 +289,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 如果没有语法高亮，设置默认深绿色 */
-#wemd pre code:not(.hljs) {
+#ahafair pre code:not(.hljs) {
   color: #3A4D39;
   background: #F0F2F0;
   border: 1px solid #DCE3DD;
@@ -299,7 +299,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
  * 表格 
  * 修复了这里无效的颜色代码 #D2DSD4
  */
-#wemd table {
+#ahafair table {
   width: 100%;
   border-collapse: collapse;
   margin: 40px 0;
@@ -308,7 +308,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   /* 已修正 */
 }
 
-#wemd table tr th {
+#ahafair table tr th {
   background: #EDF1EE;
   color: #4F6F52;
   font-weight: 700;
@@ -318,7 +318,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   text-align: left;
 }
 
-#wemd table tr td {
+#ahafair table tr td {
   border: 1px solid #D2D4D4;
   /* 已修正 */
   padding: 12px 10px;
@@ -327,12 +327,12 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
 }
 
 /* 脚注 */
-#wemd .footnote-word,
-#wemd .footnote-ref {
+#ahafair .footnote-word,
+#ahafair .footnote-ref {
   color: #4F6F52;
 }
 
-#wemd .footnotes-sep {
+#ahafair .footnotes-sep {
   border-top: 1px solid #E8EBE9;
   padding-top: 20px;
   margin-top: 60px;
@@ -341,30 +341,30 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   text-align: center;
 }
 
-#wemd .footnote-num {
+#ahafair .footnote-num {
   font-weight: bold;
   color: #739072;
   margin-right: 4px;
 }
 
-#wemd .footnote-item p {
+#ahafair .footnote-item p {
   color: #889E8B;
   font-size: 12px;
   margin: 4px 0;
 }
 
 /* 公式 */
-#wemd .block-equation svg {
+#ahafair .block-equation svg {
   max-width: 100% !important;
 }
 
-#wemd .inline-equation svg {
+#ahafair .inline-equation svg {
   max-width: 100%;
   vertical-align: middle;
 }
 
 /* 提示块 - 莫兰迪森林风格 */
-#wemd .callout {
+#ahafair .callout {
   margin: 30px 0;
   padding: 20px;
   background: #F6F8F6;
@@ -372,25 +372,25 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   border-radius: 8px;
 }
 
-#wemd .callout-title {
+#ahafair .callout-title {
   font-weight: 700;
   margin-bottom: 10px;
   color: #4F6F52;
   font-size: 15px;
 }
 
-#wemd .callout-icon { margin-right: 8px;
+#ahafair .callout-icon { margin-right: 8px;
   margin-right: 6px;
 }
 
-#wemd .callout-note { border-left: 4px solid #739072; }
-#wemd .callout-tip { border-left: 4px solid #86A789; }
-#wemd .callout-important { border-left: 4px solid #4F6F52; }
-#wemd .callout-warning { border-left: 4px solid #D98C45; }
-#wemd .callout-caution { border-left: 4px solid #B33D25; }
+#ahafair .callout-note { border-left: 4px solid #739072; }
+#ahafair .callout-tip { border-left: 4px solid #86A789; }
+#ahafair .callout-important { border-left: 4px solid #4F6F52; }
+#ahafair .callout-warning { border-left: 4px solid #D98C45; }
+#ahafair .callout-caution { border-left: 4px solid #B33D25; }
 
 /* Imageflow CSS */
-#wemd .imageflow-layer1 {
+#ahafair .imageflow-layer1 {
   margin-top: 1em;
   margin-bottom: 0.5em;
   /* white-space: normal; */
@@ -399,13 +399,13 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   overflow: hidden;
 }
 
-#wemd .imageflow-layer2 {
+#ahafair .imageflow-layer2 {
   white-space: nowrap;
   width: 100%;
   overflow-x: scroll;
 }
 
-#wemd .imageflow-layer3 {
+#ahafair .imageflow-layer3 {
   display: inline-block;
   word-wrap: break-word;
   white-space: normal;
@@ -415,7 +415,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   flex-shrink: 0;
 }
 
-#wemd .imageflow-img {
+#ahafair .imageflow-img {
   display: block;
   width: 100%;
   height: auto;
@@ -424,7 +424,7 @@ export const morandiForestTheme = `/* 莫兰迪森林风格 */
   border-radius: 4px;
 }
 
-#wemd .imageflow-caption {
+#ahafair .imageflow-caption {
   text-align: center;
   margin-top: 0px;
   padding-top: 0px;

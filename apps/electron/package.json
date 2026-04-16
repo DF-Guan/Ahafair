@@ -1,10 +1,10 @@
 {
-  "name": "wemd-electron",
+  "name": "ahafair-electron",
   "version": "1.2.9",
-  "description": "WeMD - 更优雅的 Markdown 公众号排版工具",
+  "description": "Ahafair - 更优雅的 Markdown 公众号排版工具",
   "main": "dist/main.js",
-  "homepage": "https://wemd.app",
-  "author": "WeMD Team",
+  "homepage": "https://ahafair.app",
+  "author": "Ahafair Team",
   "scripts": {
     "build": "rimraf dist && tsc",
     "test": "rimraf dist && tsc && node --test dist/**/*.test.js",

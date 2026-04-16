@@ -10,40 +10,40 @@ export function generateComponents(
   presets: ComponentPresets,
 ): string {
   const { quotePreset } = presets;
-  const underlineStyle = "var(--wemd-underline-style)";
-  const underlineColor = "var(--wemd-underline-color)";
-  const hrColor = "var(--wemd-hr-color)";
-  const hrHeight = "var(--wemd-hr-height)";
+  const underlineStyle = "var(--ahafair-underline-style)";
+  const underlineColor = "var(--ahafair-underline-color)";
+  const hrColor = "var(--ahafair-hr-color)";
+  const hrHeight = "var(--ahafair-hr-height)";
 
-  return `#wemd blockquote, 
-#wemd .multiquote-1, 
-#wemd .multiquote-2, 
-#wemd .multiquote-3 {
-  margin: var(--wemd-paragraph-margin) 0 !important;
-  padding: var(--wemd-quote-padding-y) var(--wemd-quote-padding-x);
+  return `#ahafair blockquote, 
+#ahafair .multiquote-1, 
+#ahafair .multiquote-2, 
+#ahafair .multiquote-3 {
+  margin: var(--ahafair-paragraph-margin) 0 !important;
+  padding: var(--ahafair-quote-padding-y) var(--ahafair-quote-padding-x);
   ${quotePreset.base}
 }
-#wemd blockquote p,
-#wemd .multiquote-1 p,
-#wemd .multiquote-2 p,
-#wemd .multiquote-3 p { 
-  color: var(--wemd-quote-text-color); 
+#ahafair blockquote p,
+#ahafair .multiquote-1 p,
+#ahafair .multiquote-2 p,
+#ahafair .multiquote-3 p { 
+  color: var(--ahafair-quote-text-color); 
   margin: 0 !important;
-  font-size: var(--wemd-quote-font-size);
-  line-height: var(--wemd-quote-line-height);
+  font-size: var(--ahafair-quote-font-size);
+  line-height: var(--ahafair-quote-line-height);
   ${v.quoteTextCentered ? "text-align: center !important;" : ""}
 }
 
-#wemd pre {
-  margin: var(--wemd-paragraph-margin) 0;
+#ahafair pre {
+  margin: var(--ahafair-paragraph-margin) 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-#wemd pre code {
+#ahafair pre code {
   display: block;
   background: transparent;
-  font-size: var(--wemd-code-font-size);
+  font-size: var(--ahafair-code-font-size);
   padding: 16px;
   margin: 0;
   overflow-x: auto;
@@ -57,24 +57,24 @@ export function generateComponents(
   min-width: max-content;
 }
 
-#wemd pre.custom {
+#ahafair pre.custom {
   position: relative;
-  margin: var(--wemd-paragraph-margin) 0;
-  background: var(--wemd-code-background);
+  margin: var(--ahafair-paragraph-margin) 0;
+  background: var(--ahafair-code-background);
   border-radius: 8px;
   overflow: hidden;
 }
 
-#wemd pre.custom > .mac-sign {
+#ahafair pre.custom > .mac-sign {
   display: ${v.showMacBar ? "block" : "none"};
   line-height: 0;
 }
 
 ${getCodeThemeCSS(v.codeTheme)}
 
-#wemd code {
-  color: var(--wemd-inline-code-color);
-  background: var(--wemd-inline-code-background);
+#ahafair code {
+  color: var(--ahafair-inline-code-color);
+  background: var(--ahafair-inline-code-background);
   padding: 2px 4px;
   border-radius: ${v.inlineCodeStyle === "rounded" ? "12px" : v.inlineCodeStyle === "github" ? "4px" : "2px"};
   font-size: 0.9em;
@@ -82,36 +82,36 @@ ${getCodeThemeCSS(v.codeTheme)}
   white-space: normal;
   letter-spacing: 0;
   ${v.inlineCodeStyle === "github" ? "border: 1px solid rgba(0,0,0,0.06);" : ""}
-  ${v.inlineCodeStyle === "color-text" ? `background: transparent; font-weight: bold; border-bottom: 2px solid var(--wemd-primary-color-50);` : ""}
+  ${v.inlineCodeStyle === "color-text" ? `background: transparent; font-weight: bold; border-bottom: 2px solid var(--ahafair-primary-color-50);` : ""}
 }
 
 /* 代码块样式需要更高优先级覆盖行内代码样式 */
-#wemd pre code,
-#wemd pre code.hljs {
+#ahafair pre code,
+#ahafair pre code.hljs {
   white-space: pre;
   text-align: left;
   letter-spacing: 0;
   word-spacing: 0;
 }
 
-#wemd a {
-  color: var(--wemd-link-color);
+#ahafair a {
+  color: var(--ahafair-link-color);
   text-decoration: none;
-  border-bottom: ${v.linkUnderline ? `1px solid var(--wemd-link-color)` : "none"};
+  border-bottom: ${v.linkUnderline ? `1px solid var(--ahafair-link-color)` : "none"};
   word-break: break-all;
 }
 
-#wemd em {
+#ahafair em {
   font-style: italic;
-  color: var(--wemd-italic-color);
+  color: var(--ahafair-italic-color);
 }
 
-#wemd del {
+#ahafair del {
   text-decoration: line-through;
-  color: var(--wemd-del-color);
+  color: var(--ahafair-del-color);
 }
 
-#wemd u {
+#ahafair u {
   text-decoration-line: underline;
   text-decoration-style: ${underlineStyle};
   text-underline-offset: 0.18em;
@@ -119,15 +119,15 @@ ${getCodeThemeCSS(v.codeTheme)}
   text-decoration-color: ${underlineColor};
 }
 
-#wemd mark {
-  background: var(--wemd-mark-background);
-  color: var(--wemd-mark-color);
+#ahafair mark {
+  background: var(--ahafair-mark-background);
+  color: var(--ahafair-mark-color);
   padding: 0 2px;
   border-radius: 2px;
 }
 
-#wemd hr {
-  margin: var(--wemd-hr-margin) 0;
+#ahafair hr {
+  margin: var(--ahafair-hr-margin) 0;
   border: 0;
   ${(() => {
     const style = v.hrStyle || "solid";
@@ -150,20 +150,20 @@ ${getCodeThemeCSS(v.codeTheme)}
     `;
   })()}
 }
-#wemd table {
+#ahafair table {
   width: 100%;
   border-collapse: collapse;
-  margin: var(--wemd-paragraph-margin) 0;
+  margin: var(--ahafair-paragraph-margin) 0;
 }
 
-#wemd th {
-  background: var(--wemd-table-header-background);
-  color: var(--wemd-table-header-color);
+#ahafair th {
+  background: var(--ahafair-table-header-background);
+  color: var(--ahafair-table-header-color);
   font-weight: bold;
 }
 
-#wemd th, #wemd td {
-  border: 1px solid var(--wemd-table-border-color);
+#ahafair th, #ahafair td {
+  border: 1px solid var(--ahafair-table-border-color);
   padding: 8px 12px;
   text-align: left;
 }
@@ -171,18 +171,18 @@ ${getCodeThemeCSS(v.codeTheme)}
 ${
   v.tableZebra
     ? `
-#wemd tr:nth-child(even) {
+#ahafair tr:nth-child(even) {
   background: #fcfcfc;
 }`
     : ""
 }
 
-#wemd img {
+#ahafair img {
   display: block;
   max-width: 100%;
   height: auto;
-  margin: var(--wemd-image-margin) auto;
-  border-radius: var(--wemd-image-border-radius);
-  box-shadow: var(--wemd-image-shadow);
+  margin: var(--ahafair-image-margin) auto;
+  border-radius: var(--ahafair-image-border-radius);
+  box-shadow: var(--ahafair-image-shadow);
 }`;
 }

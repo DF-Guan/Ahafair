@@ -5,12 +5,12 @@ import {
   type CustomTheme,
   type DesignerVariables,
 } from "./themes/builtInThemes";
-import { convertCssToWeChatDarkMode } from "@wemd/core";
+import { convertCssToWeChatDarkMode } from "@ahafair/core";
 import { generateCSS } from "../components/Theme/ThemeDesigner/generateCSS";
 
 // 深色模式 CSS 转换缓存
 const darkCssCache = new Map<string, string>();
-const DARK_MARK = "/* wemd-wechat-dark-converted */";
+const DARK_MARK = "/* ahafair-wechat-dark-converted */";
 
 const hashCss = (css: string): string => {
   let hash = 0;
@@ -26,8 +26,8 @@ const buildDarkCacheKey = (themeId: string, css: string) =>
 const clearDarkCssCache = () => darkCssCache.clear();
 
 // localStorage 键名
-const CUSTOM_THEMES_KEY = "wemd-custom-themes";
-const SELECTED_THEME_KEY = "wemd-selected-theme";
+const CUSTOM_THEMES_KEY = "ahafair-custom-themes";
+const SELECTED_THEME_KEY = "ahafair-selected-theme";
 
 const getBrowserStorage = (): Storage | null => {
   if (typeof window === "undefined") {

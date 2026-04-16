@@ -1,7 +1,7 @@
 import type { StorageAdapter } from '../StorageAdapter';
 import type { FileItem, StorageInitResult } from '../types';
 
-const DB_NAME = 'wemd-files';
+const DB_NAME = 'ahafair-files';
 const DB_VERSION = 2; // 升级版本以触发迁移
 const META_STORE = 'meta';
 const CONTENT_STORE = 'content';
