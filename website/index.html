@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahafair - 更优雅的公众号 Markdown 排版编辑器</title>
+  <meta name="description" content="Ahafair 是一款专为微信公众号设计的 Markdown 编辑器，银色简约界面，一键复制到公众号，多种精美主题可选，开源免费，本地优先。">
+  <meta name="keywords" content="公众号 Markdown编辑器, 微信 Markdown 编辑器, 公众号排版, Markdown排版工具, Ahafair">
+  <meta name="author" content="Ahafair Team">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+  <!-- Fonts: Inter + Noto Serif SC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --silver: #F5F5F7;
+      --silver-dark: #E8E8EC;
+      --black: #1D1D1F;
+      --black-soft: #2D2D2D;
+      --gray: #515154;
+      --gray-light: #86868B;
+      --white: #FFFFFF;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 30px rgba(0,0,0,0.10), 0 4px 10px rgba(0,0,0,0.06);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+      --font-serif: 'Noto Serif SC', 'Songti SC', serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--silver);
+      color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: rgba(245, 245, 247, 0.72);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .nav-logo img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nav-logo span {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover {
+      color: var(--black);
+    }
+
+    .nav-links .nav-github {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 48px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.8) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--black);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(42px, 7vw, 80px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      color: var(--black);
+      margin-bottom: 24px;
+      max-width: 800px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-title .indent {
+      margin-left: 80px;
+    }
+
+    .hero-title .right {
+      text-align: right;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(0,0,0,0.15);
+    }
+
+    /* ---- Features ---- */
+    .features {
+      padding: 80px 48px 120px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(0,0,0,0.10);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ---- Screenshot ---- */
+    .screenshot-section {
+      padding: 0 48px 120px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .screenshot-wrapper {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .screenshot-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 20px;
+      background: var(--silver-dark);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .screenshot-bar-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--silver);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .screenshot-bar-title {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-light);
+      font-weight: 500;
+    }
+
+    .screenshot-img {
+      width: 100%;
+      display: block;
+      /* Placeholder gradient — replace with actual screenshot */
+      min-height: 400px;
+      background: linear-gradient(135deg, #f0f0f3 0%, #e8e8ec 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-light);
+      font-size: 14px;
+    }
+
+    /* ---- Tech Stack ---- */
+    .tech-section {
+      padding: 80px 48px 120px;
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .tech-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tech-section h2 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .tech-section p {
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .tech-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--silver);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      padding: 48px;
+      text-align: center;
+      border-top: 1px solid rgba(0,0,0,0.04);
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--gray-light);
+    }
+
+    footer a {
+      color: var(--gray);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--black);
+    }
+
+    /* ---- Animations ---- */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .hero {
+        padding: 120px 24px 60px;
+      }
+
+      .hero-title {
+        letter-spacing: -1px;
+      }
+
+      .hero-title .indent {
+        margin-left: 0;
+      }
+
+      .features {
+        padding: 60px 24px 80px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .screenshot-section {
+        padding: 0 24px 80px;
+      }
+
+      .tech-section {
+        padding: 60px 24px 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="./favicon.svg" alt="Ahafair">
+      <span>Ahafair</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">功能特点</a>
+      <a href="#tech">技术栈</a>
+      <a href="https://github.com/tenngoxars/WeMD" target="_blank" rel="noopener" class="nav-github">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      v1.2.9 现已发布
+    </div>
+
+    <h1 class="hero-title">
+      <span class="right">更优雅的</span><br>
+      <span class="indent">公众号</span><br>
+      排版体验。
+    </h1>
+
+    <p class="hero-desc">
+      100% 本地存储，排版一气呵成。<br>
+      一款让你专注书写、告别格式烦恼的公众号编辑器。
+    </p>
+
+    <div class="hero-buttons">
+      <a href="https://github.com/tenngoxars/WeMD/releases" target="_blank" rel="noopener" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        立即下载
+      </a>
+      <a href="https://edit.ahafair.app" target="_blank" rel="noopener" class="btn-secondary">
+        在线编辑
+      </a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-num">01 / Local First</div>
+        <h3>你的文字，握在手里</h3>
+        <p>真正的 Local First 体验。不经过云端，所有的草稿都真切地存放在你的硬盘里，编辑更安心。</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-num">02 / 精准预览</div>
+        <h3>眼里看到的，就是手机里的</h3>
+        <p>内置色彩语义保全算法，支持 98% 高还原深色预览。在按下复制键前，一切细节已尽在掌握。</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-num">03 / 主题定制</div>
+        <h3>全能主题编辑器</h3>
+        <p>内置可视化与 CSS 双模式。你可以通过图形界面快速调整，也可以直接编写 CSS 实现任意排版效果。</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-num">04 / 开源多端</div>
+        <h3>全平台支持</h3>
+        <p>提供 macOS、Windows 客户端与网页版。作为开源项目，代码完全透明，并支持私有化部署。</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="tech-section" id="tech">
+    <div class="tech-inner">
+      <h2>技术栈</h2>
+      <p>基于现代化技术栈构建，性能与体验兼得。</p>
+      <div class="tech-badges">
+        <div class="tech-badge">⚛️ React 18</div>
+        <div class="tech-badge">TypeScript</div>
+        <div class="tech-badge">Electron</div>
+        <div class="tech-badge">Vite</div>
+        <div class="tech-badge">pnpm</div>
+        <div class="tech-badge">Turborepo</div>
+        <div class="tech-badge">Zustand</div>
+        <div class="tech-badge">CodeMirror 6</div>
+        <div class="tech-badge">NestJS</div>
+        <div class="tech-badge">Docker</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>为微信公众号排版而生 · <a href="https://github.com/tenngoxars/WeMD" target="_blank" rel="noopener">开源 MIT</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 银色背景，圆润 Apple Style -->
+  <rect width="200" height="200" rx="44" fill="url(#silverGrad)"/>
+
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="silverGrad" x1="0" y1="0" x2="0" y2="200">
+      <stop offset="0%" stop-color="#F5F5F7"/>
+      <stop offset="100%" stop-color="#E8E8EC"/>
+    </linearGradient>
+    <linearGradient id="blackGrad" x1="0" y1="0" x2="0" y2="60">
+      <stop offset="0%" stop-color="#2D2D2D"/>
+      <stop offset="100%" stop-color="#1A1A1A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 黑色圆角矩形容器 -->
+  <rect x="40" y="40" width="120" height="120" rx="28" fill="url(#blackGrad)"/>
+
+  <!-- 内部光泽高光 -->
+  <rect x="40" y="40" width="120" height="60" rx="28" fill="white" fill-opacity="0.08"/>
+
+  <!-- 字母 A 的简约设计 -->
+  <path d="M100 65 L78 130 H92 L97 115 H103 L108 130 H122 L100 65 Z M97 105 L100 92 L103 105 H97 Z" fill="white"/>
+</svg>
