@@ -9,19 +9,16 @@
   <meta name="author" content="Ahafair Team">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
 
-  <!-- Fonts: Inter + Noto Serif SC -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --silver: #F5F5F7;
@@ -41,9 +38,7 @@
       --font-serif: 'Noto Serif SC', 'Songti SC', serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font-sans);
@@ -54,389 +49,176 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ---- Nav ---- */
+    /* Nav */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
       padding: 20px 48px;
       background: rgba(245, 245, 247, 0.72);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--black); }
+    .nav-logo img { width: 28px; height: 28px; }
+    .nav-logo span { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.2s; letter-spacing: 0.3px; }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links .nav-github { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gray); }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--black);
-    }
-
-    .nav-logo img {
-      width: 28px;
-      height: 28px;
-    }
-
-    .nav-logo span {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gray);
-      text-decoration: none;
-      transition: color 0.2s;
-      letter-spacing: 0.3px;
-    }
-
-    .nav-links a:hover {
-      color: var(--black);
-    }
-
-    .nav-links .nav-github {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: var(--gray);
-    }
-
-    /* ---- Hero ---- */
+    /* Hero */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 140px 48px 80px;
       text-align: center;
       position: relative;
     }
-
     .hero::before {
       content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60%;
+      position: absolute; top: 0; left: 0; right: 0; height: 60%;
       background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.8) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
       padding: 6px 16px;
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--gray);
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 32px;
+      background: var(--white); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 999px; font-size: 12px; font-weight: 500; color: var(--gray);
+      box-shadow: var(--shadow-sm); margin-bottom: 32px;
       animation: fadeUp 0.6s ease both;
     }
-
-    .hero-badge-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--black);
-      border-radius: 50%;
-      animation: pulse 2s ease infinite;
-    }
-
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--black); border-radius: 50%; animation: pulse 2s ease infinite; }
     .hero-title {
       font-family: var(--font-serif);
       font-size: clamp(42px, 7vw, 80px);
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -2px;
-      color: var(--black);
-      margin-bottom: 24px;
-      max-width: 800px;
+      font-weight: 600; line-height: 1.1; letter-spacing: -2px;
+      color: var(--black); margin-bottom: 24px; max-width: 800px;
       animation: fadeUp 0.6s 0.1s ease both;
     }
+    .hero-title .indent { margin-left: 80px; }
+    .hero-title .right { text-align: right; }
+    .hero-desc { font-size: 18px; color: var(--gray); max-width: 520px; line-height: 1.7; margin-bottom: 48px; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
 
-    .hero-title .indent {
-      margin-left: 80px;
-    }
-
-    .hero-title .right {
-      text-align: right;
-    }
-
-    .hero-desc {
-      font-size: 18px;
-      color: var(--gray);
-      max-width: 520px;
-      line-height: 1.7;
-      margin-bottom: 48px;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-
+    /* Buttons */
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      background: var(--black);
-      color: var(--white);
-      border: none;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: var(--black); color: var(--white);
+      border: none; border-radius: 999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; cursor: pointer;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.20);
-    }
-
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.20); }
     .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      background: var(--white);
-      color: var(--black);
-      border: 1px solid rgba(0,0,0,0.10);
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: var(--shadow-sm);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: var(--white); color: var(--black);
+      border: 1px solid rgba(0,0,0,0.10); border-radius: 999px; font-size: 15px; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm);
     }
+    .btn-secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: rgba(0,0,0,0.15); }
 
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(0,0,0,0.15);
-    }
-
-    /* ---- Features ---- */
-    .features {
-      padding: 80px 48px 120px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
+    /* Features */
+    .features { padding: 80px 48px 120px; max-width: 1100px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .feature-card {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: var(--radius-lg);
-      padding: 40px;
+      background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-lg); padding: 40px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
-
     .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      opacity: 0; transition: opacity 0.3s;
     }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(0,0,0,0.10); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-num { font-size: 11px; font-weight: 600; color: var(--gray-light); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .feature-card h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--black); margin-bottom: 12px; letter-spacing: -0.5px; }
+    .feature-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
 
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-      border-color: rgba(0,0,0,0.10);
+    /* Editor Preview */
+    .editor-preview {
+      padding: 0 48px 120px; max-width: 1100px; margin: 0 auto;
     }
-
-    .feature-card:hover::before {
-      opacity: 1;
+    .editor-wrapper {
+      background: var(--white); border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);
     }
-
-    .feature-num {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--gray-light);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    .editor-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 20px; background: #1D1D1F;
     }
-
-    .feature-card h3 {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
+    .editor-bar-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .editor-bar-dot.red { background: #FF5F57; }
+    .editor-bar-dot.yellow { background: #FFBD2E; }
+    .editor-bar-dot.green { background: #28C840; }
+    .editor-bar-title { flex: 1; text-align: center; font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
+    .editor-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 400px; }
+    .editor-pane { padding: 24px; border-right: 1px solid rgba(0,0,0,0.06); font-family: 'SF Mono', 'Monaco', monospace; font-size: 13px; line-height: 1.7; color: var(--gray); }
+    .editor-pane-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-light); margin-bottom: 12px; }
+    .preview-pane { padding: 24px; }
+    .preview-pane-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-light); margin-bottom: 12px; }
+    .preview-pane .preview-box {
+      background: #F5F5F7; border-radius: 12px; padding: 20px;
+      font-family: 'Noto Serif SC', serif; font-size: 14px; line-height: 1.8; color: var(--black);
     }
+    .preview-pane .preview-box h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .preview-pane .preview-box p { color: var(--gray); }
 
-    .feature-card p {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.7;
-    }
-
-    /* ---- Tech Stack ---- */
+    /* Tech */
     .tech-section {
       padding: 80px 48px 120px;
       background: var(--white);
       border-top: 1px solid rgba(0,0,0,0.04);
       border-bottom: 1px solid rgba(0,0,0,0.04);
     }
-
-    .tech-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .tech-section h2 {
-      font-family: var(--font-serif);
-      font-size: 32px;
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 16px;
-      letter-spacing: -1px;
-    }
-
-    .tech-section p {
-      font-size: 16px;
-      color: var(--gray);
-      margin-bottom: 48px;
-      line-height: 1.7;
-    }
-
-    .tech-badges {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
+    .tech-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .tech-section h2 { font-family: var(--font-serif); font-size: 32px; font-weight: 600; color: var(--black); margin-bottom: 16px; letter-spacing: -1px; }
+    .tech-section p { font-size: 16px; color: var(--gray); margin-bottom: 48px; line-height: 1.7; }
+    .tech-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
     .tech-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: var(--silver);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gray);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; background: var(--silver);
+      border: 1px solid rgba(0,0,0,0.06); border-radius: 999px;
+      font-size: 13px; font-weight: 500; color: var(--gray);
     }
 
-    /* ---- Footer ---- */
-    footer {
-      padding: 48px;
+    /* CTA Section */
+    .cta-section {
+      padding: 80px 48px;
       text-align: center;
-      border-top: 1px solid rgba(0,0,0,0.04);
     }
+    .cta-section h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 600; color: var(--black); margin-bottom: 12px; letter-spacing: -0.5px; }
+    .cta-section p { font-size: 16px; color: var(--gray); margin-bottom: 32px; }
 
-    footer p {
-      font-size: 13px;
-      color: var(--gray-light);
-    }
+    /* Footer */
+    footer { padding: 48px; text-align: center; border-top: 1px solid rgba(0,0,0,0.04); }
+    footer p { font-size: 13px; color: var(--gray-light); }
+    footer a { color: var(--gray); text-decoration: none; }
+    footer a:hover { color: var(--black); }
 
-    footer a {
-      color: var(--gray);
-      text-decoration: none;
-    }
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-    footer a:hover {
-      color: var(--black);
-    }
-
-    /* ---- Animations ---- */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    /* ---- Responsive ---- */
+    /* Responsive */
     @media (max-width: 768px) {
-      nav {
-        padding: 16px 24px;
-      }
-
-      .nav-links {
-        gap: 16px;
-      }
-
-      .hero {
-        padding: 120px 24px 60px;
-      }
-
-      .hero-title {
-        letter-spacing: -1px;
-      }
-
-      .hero-title .indent {
-        margin-left: 0;
-      }
-
-      .features {
-        padding: 60px 24px 80px;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-
-      .tech-section {
-        padding: 60px 24px 80px;
-      }
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 16px; }
+      .hero { padding: 120px 24px 60px; }
+      .hero-title .indent { margin-left: 0; }
+      .features { padding: 60px 24px 80px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .editor-preview { padding: 0 24px 80px; }
+      .editor-body { grid-template-columns: 1fr; }
+      .editor-pane { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+      .tech-section { padding: 60px 24px 80px; }
+      .cta-section { padding: 60px 24px; }
     }
   </style>
 </head>
@@ -445,7 +227,7 @@
   <!-- Navigation -->
   <nav>
     <a href="/" class="nav-logo">
-      <img src="./favicon.svg" alt="Ahafair">
+      <img src="favicon.svg" alt="Ahafair">
       <span>Ahafair</span>
     </a>
     <div class="nav-links">
@@ -481,8 +263,8 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         立即下载
       </a>
-      <a href="https://DF-Guan.github.io/Ahafair" target="_blank" rel="noopener" class="btn-secondary">
-        在线编辑
+      <a href="https://github.com/DF-Guan/Ahafair" target="_blank" rel="noopener" class="btn-secondary">
+        源代码
       </a>
     </div>
   </section>
@@ -518,6 +300,48 @@
     </div>
   </section>
 
+  <!-- Editor Preview -->
+  <section class="editor-preview">
+    <div class="editor-wrapper">
+      <div class="editor-bar">
+        <div class="editor-bar-dot red"></div>
+        <div class="editor-bar-dot yellow"></div>
+        <div class="editor-bar-dot green"></div>
+        <div class="editor-bar-title">Ahafair — 公众号 Markdown 编辑器</div>
+      </div>
+      <div class="editor-body">
+        <div class="editor-pane">
+          <div class="editor-pane-label">Markdown 编辑</div>
+          <div># Hello Ahafair\n\n这是一段示例文字...\n\n- 列表项一\n- 列表项二\n\n> 引用文本示例</div>
+        </div>
+        <div class="preview-pane">
+          <div class="preview-pane-label">公众号预览</div>
+          <div class="preview-box">
+            <h2>Hello Ahafair</h2>
+            <p>这是一段示例文字...</p>
+            <p>• 列表项一</p>
+            <p>• 列表项二</p>
+            <p>「引用文本示例」</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>开始使用 Ahafair</h2>
+    <p>开源免费，支持 macOS / Windows / 网页版</p>
+    <div class="hero-buttons">
+      <a href="https://github.com/DF-Guan/Ahafair/releases" target="_blank" rel="noopener" class="btn-primary">
+        下载桌面版
+      </a>
+      <a href="https://github.com/DF-Guan/Ahafair" target="_blank" rel="noopener" class="btn-secondary">
+        查看源码
+      </a>
+    </div>
+  </section>
+
   <!-- Tech Stack -->
   <section class="tech-section" id="tech">
     <div class="tech-inner">
@@ -540,7 +364,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>为微信公众号排版而生 · <a href="https://github.com/DF-Guan/Ahafair" target="_blank" rel="noopener">开源 MIT</a></p>
+    <p>为微信公众号排版而生 · <a href="https://github.com/DF-Guan/Ahafair" target="_blank" rel="noopener">开源 MIT · Ahafair Team</a></p>
   </footer>
 
 </body>
