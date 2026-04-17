@@ -776,7 +776,7 @@ function createMenu() {
                 },
                 {
                     label: 'GitHub 仓库',
-                    click: () => shell.openExternal('https://github.com/tenngoxars/Ahafair'),
+                    click: () => shell.openExternal('https://github.com/DF-Guan/Ahafair'),
                 },
             ],
         },

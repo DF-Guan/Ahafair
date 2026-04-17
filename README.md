@@ -98,11 +98,11 @@ docker compose up -d
 
 访问 `http://localhost:8080` 即可使用。
 
-默认会拉取 `ghcr.io/tenngoxars/ahafair-web:latest`。  
+默认会拉取 `ghcr.io/DF-Guan/ahafair-web:latest`。  
 如需指定版本镜像，可覆盖环境变量：
 
 ```bash
-WEMD_IMAGE=ghcr.io/tenngoxars/ahafair-web:<版本号> docker compose up -d
+WEMD_IMAGE=ghcr.io/DF-Guan/ahafair-web:<版本号> docker compose up -d
 ```
 
 ---

@@ -39,7 +39,7 @@ export function SidebarFooter() {
       </div>
       <div className="footer-links">
         <a
-          href="https://github.com/tenngoxars/Ahafair"
+          href="https://github.com/DF-Guan/Ahafair"
           target="_blank"
           rel="noopener noreferrer"
           data-tooltip="GitHub 仓库"

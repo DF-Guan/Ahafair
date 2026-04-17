@@ -1,6 +1,6 @@
 import { app, shell, BrowserWindow } from 'electron';
 
-const GITHUB_REPO = 'tenngoxars/Ahafair';
+const GITHUB_REPO = 'DF-Guan/Ahafair';
 const RELEASES_URL = `https://github.com/${GITHUB_REPO}/releases`;
 const API_URL = `https://api.github.com/repos/${GITHUB_REPO}/releases/latest`;
 

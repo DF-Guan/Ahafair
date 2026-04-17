@@ -175,7 +175,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 复制错误信息
               </button>
               <a
-                href={`https://github.com/tenngoxars/Ahafair/issues/new?title=${encodeURIComponent(
+                href={`https://github.com/DF-Guan/Ahafair/issues/new?title=${encodeURIComponent(
                   `[Crash] ${this.state.error?.message || "Unknown Error"}`,
                 )}&body=${encodeURIComponent(
                   `**Error Message**:\n${this.state.error?.message}\n\n**Stack Trace**:\n\`\`\`\n${
