@@ -57,7 +57,7 @@ export function SidebarFooter() {
           <Globe size={16} />
         </a>
         <a
-          href="https://df-guan.github.io/Ahafair/"
+          href="https://github.com/DF-Guan/Ahafair"
           target="_blank"
           rel="noopener noreferrer"
           data-tooltip="帮助文档"
