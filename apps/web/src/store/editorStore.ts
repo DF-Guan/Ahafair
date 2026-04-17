@@ -118,7 +118,7 @@ $$
 $$
 
 ## 7. 脚注与链接建议
-这里演示脚注的使用：[WeChat Markdown](https://github.com/tenngoxars/Ahafair "Ahafair 是一款专为公众号设计的编辑器") 可以极大提升排版效率。
+这里演示脚注的使用：[WeChat Markdown](https://github.com/DF-Guan/Ahafair "Ahafair 是一款专为公众号设计的编辑器") 可以极大提升排版效率。
 
 在 Ahafair 中，只需为链接添加“标题”（双引号里的文字），系统就会自动将其转换为文末脚注，这是最符合微信公众号习惯的排法。
 
@@ -133,7 +133,7 @@ $$
 ---
 
 ## 9. 图片
-![Ahafair：专为微信公众号设计的现代化 Markdown 编辑器](https://img.ahafair.app/example.jpg)
+![Ahafair：专为微信公众号设计的现代化 Markdown 编辑器](https://df-guan.github.io/Ahafair/favicon.svg)
 
 **开始编辑吧!** 🚀
 `;

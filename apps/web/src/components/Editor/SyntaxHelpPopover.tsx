@@ -42,7 +42,7 @@ export function SyntaxHelpPopover() {
 
   const openDocs = () => {
     window.open(
-      "https://ahafair.app/docs/reference/markdown-syntax",
+      "https://df-guan.github.io/Ahafair/",
       "_blank",
       "noopener,noreferrer",
     );
