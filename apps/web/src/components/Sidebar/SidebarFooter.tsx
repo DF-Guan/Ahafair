@@ -48,7 +48,7 @@ export function SidebarFooter() {
           <GithubIcon size={16} />
         </a>
         <a
-          href="https://ahafair.app"
+          href="https://df-guan.github.io/Ahafair/"
           target="_blank"
           rel="noopener noreferrer"
           data-tooltip="官方网站"
@@ -57,7 +57,7 @@ export function SidebarFooter() {
           <Globe size={16} />
         </a>
         <a
-          href="https://ahafair.app/docs"
+          href="https://df-guan.github.io/Ahafair/"
           target="_blank"
           rel="noopener noreferrer"
           data-tooltip="帮助文档"
